@@ -17,6 +17,30 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+        public IActionResult About()
+        {
+            return View();
+        }
+        public IActionResult Room()
+        {
+            return View();
+        }
+        public IActionResult RoomDetails()
+        {
+            return View();
+        }
+        public IActionResult Activitys()
+        {
+            return View();
+        }
+        public IActionResult ActivityDetail()
+        {
+            return View();
+        }
+        public IActionResult Contact()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\admin\css\" />
+    <Folder Include="wwwroot\admin\js\" />
+  </ItemGroup>
+
 </Project>
