@@ -1,3 +1,5 @@
+using BusinessLayer.Services;
+using EntityLayer.Entities;
 using HotelProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -52,5 +54,6 @@ namespace HotelProject.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
