@@ -17,9 +17,11 @@ namespace BusinessLayer.Services
         private readonly ILogger<RoomService> _logger;
         private readonly ApplicationDbContext _context;
 
-        public RoomService(ApplicationDbContext context)
+        public RoomService(ILogger<RoomService> logger, ApplicationDbContext context)
         {
             _context = context;
+            _logger = logger;
+
         }
 
         public string InsertRoom(Room model)
@@ -52,6 +54,7 @@ namespace BusinessLayer.Services
                 }
 
                 existingRoom.Name = model.Name;
+                existingRoom.Price = model.Price;
 
 
                 _context.Rooms.Update(existingRoom);

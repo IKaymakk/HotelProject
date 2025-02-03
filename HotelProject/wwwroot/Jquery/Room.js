@@ -25,9 +25,9 @@
 
 function updateRoom() {
     var roomData = {
-        Id: $('#roomId').val(),
-        Name: $('#roomName').val(),
-        Price: $('#roomPrice').val()
+        Id: 1,
+        Name: "$('#roomName').val()",
+        Price: 14
     };
 
     $.ajax({
@@ -99,23 +99,32 @@ function deleteFeatures() {
 
 function insertRoomImages(roomId) {
     var formData = new FormData();
-    var files = $("#imageFiles").files;
+    var files = $("#imageFiles")[0].files; 
 
-    for (var i = 0; i < files.length; i++) {
-        formData.append("imageFiles", files[i]);  
+    if (files.length === 0) {
+        alert("Lütfen en az bir dosya seçin!");
+        return;
     }
 
-    formData.append("roomId", roomId); 
+    for (var i = 0; i < files.length; i++) {
+        //if (files[i].size > 1048576) { // 1MB = 1048576 byte
+        //    alert("Dosya boyutu 1MB'den büyük olamaz: " + files[i].name);
+        //    return;
+        //}
+        formData.append("imageFiles", files[i]);
+    }
+
+    formData.append("roomId", 1);
 
     $.ajax({
         type: 'POST',
-        url: '/Admin/InsertRoomImages', 
+        url: '/Admin/InsertRoomImages',
         data: formData,
         processData: false,
         contentType: false,
         success: function (response) {
             if (response.success) {
-                alert('Görseller başarıyla eklendi!');
+                alert('Görseller başarıyla yüklendi!');
             } else {
                 alert('Hata oluştu: ' + response.error);
             }
@@ -125,6 +134,7 @@ function insertRoomImages(roomId) {
         }
     });
 }
+
 
 
 function deleteRoomImage(imageId) {
