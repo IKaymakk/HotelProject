@@ -141,5 +141,9 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+        public ActionResult frmAddRoom()
+        {
+            return View();
+        }
     }
 }

@@ -14,34 +14,45 @@
                 <div class="col-md-12">
 
                     <div class="card" id="settings-card">
-                        <div class="card-header">
-                            <h4>Oda Ayarları</h4>
-                        </div>
+
                         <div class="card-body">
 
 
                             <div class="form-group row align-items-center">
 
+                                <div class="card-header ">
+                                    <h4 style="padding-left:18px;">Oda Seç:</h4>
+                                    <div class="col-sm-6 col-md-3">
+                                        <select style="margin-left:23px;" name="site_title" class="form-control" id="site-title">
+                                            <option>Option 1</option>
+                                            <option>Option 2</option>
+                                            <option>Option 3</option>
+                                        </select>
+                                    </div>
+                                    <button onclick="openRoomModal()" style="margin-left:750px;" class="btn btn-primary" id="save-btn">Oda Ekle</button>
 
-                                <label for="site-title" class="form-control-label col-sm-3 text-md-right">Oda Seç:</label>
-                                <div class="col-sm-6 col-md-9">
-                                    <select name="site_title" class="form-control" id="site-title">
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                        <option>Option 3</option>
-                                    </select>
                                 </div>
+                                
                             </div>
+
+
+
                             <div class="form-group row align-items-center col-12">
-                                <label style="margin-left:-49px;" for="site-title" class="form-control-label col-sm-4 text-md-right">Oda Fiyatı:</label>
-                                <input style="margin-left:5px;" type="text" name="site_title" class="form-control col-4" id="site-title">
-                                <button style="margin-left:20px;" class="btn btn-primary col-4" id="save-btn">Fiyatı Güncelle</button>
+                                <div class="card-header ">
+                                    <h4>Oda Fiyatı:</h4>
+                                    <input style="margin-left:25px; margin-right:40px;" type="text" name="site_title" class="form-control col-4" id="site-title">
+                                    <button class="btn btn-primary col-4" id="save-btn">Fiyatı Güncelle</button>
+
+                                </div>
 
 
                             </div>
                             <div class="form-group row align-items-center col-12">
-                                <label style="margin-left:-49px;" for="site-title" class="form-control-label col-sm-4 text-md-right">Oda Özelliği Ekle:</label>
-                                <button class="btn btn-primary" onclick="openEditModal()" style="margin-left:6px;">Özellik Ekle</button>
+                                <div class="card-header ">
+                                    <h4>Oda Özelliği Ekle:</h4>
+                                    <button class="btn btn-primary" onclick="openEditModal()" style="margin-left:26px;">Özellik Ekle</button>
+
+                                </div>
                                 <div class="modal fade" id="myModal" role="dialog" style="display:none">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -60,13 +71,52 @@
                             </div>
 
                             <div class="form-group row align-items-center">
-                                <label class="form-control-label col-sm-3 text-md-right">Oda Resimleri:</label>
-                                <div class="col-sm-6 col-md-9">
-                                    <div class="custom-file">
-                                        <button class="btn btn-primary" onclick="openPictureModal()" style="margin-left:6px;">Resim Ekle</button>
+                                <div class="card-header ">
+                                    <h4 style="margin-left:14px;">Oda Resimleri:</h4>
+                                    <button class="btn btn-primary" onclick="openPictureModal()" style="margin-left:12px;">Resim Ekle</button>
 
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="~/images/attractions/img-1.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="~/images/avatar/img-5.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image3.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="~/images/about/img-1.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image5.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image6.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image7.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image8.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image9.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image10.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image11.jpg" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
+                                            <img src="image12.jpg" class="img-fluid">
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
 

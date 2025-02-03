@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer.Services;
+using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -12,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<RoomService>();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
