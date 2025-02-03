@@ -33,7 +33,7 @@ namespace HotelProject.Controllers
 
 
         [HttpPost]
-        public JsonResult InsertRoom(Room model)
+        public JsonResult InsertRoom([FromBody] Room model)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace HotelProject.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateRoom(Room model)
+        public JsonResult UpdateRoom([FromBody]  Room model)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace HotelProject.Controllers
         }
 
         [HttpPost]
-        public JsonResult InsertOrUpdateFeatures(RoomFeatures model)
+        public JsonResult InsertOrUpdateFeatures([FromBody] RoomFeatures model)
         {
             try
             {
@@ -93,7 +93,6 @@ namespace HotelProject.Controllers
         }
 
         [HttpPost]
-        [Route("InsertRoomImages")]
         public IActionResult InsertRoomImages([FromForm] List<IFormFile> imageFiles, [FromForm] int roomId)
         {
             try
