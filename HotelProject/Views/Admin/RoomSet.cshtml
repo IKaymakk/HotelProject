@@ -3,65 +3,95 @@
 }
 <div class="main-content">
     <section class="section">
-        
+
 
         <div class="section-body">
-            
+
 
             <div id="output-status"></div>
             <div class="row">
-                
+
                 <div class="col-md-12">
-                    <form id="setting-form">
-                        <div class="card" id="settings-card">
-                            <div class="card-header">
-                                <h4>Oda Ayarları</h4>
-                            </div>
-                            <div class="card-body">
-                              
 
-                                <div class="form-group row align-items-center">
-
-
-                                    <label for="site-title" class="form-control-label col-sm-3 text-md-right">Oda Seç</label>
-                                    <div class="col-sm-6 col-md-9">
-                                        <select  name="site_title" class="form-control" id="site-title">
-                                            <option>Option 1</option>
-                                            <option>Option 2</option>
-                                            <option>Option 3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row align-items-center">
-
-                                    
-                                    <label for="site-title" class="form-control-label col-sm-3 text-md-right">Oda Fiyatı</label>
-                                    <div class="col-sm-6 col-md-9">
-                                        <input type="text" name="site_title" class="form-control" id="site-title">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group row align-items-center">
-                                    <label class="form-control-label col-sm-3 text-md-right">Site Logo</label>
-                                    <div class="col-sm-6 col-md-9">
-                                        <div class="custom-file">
-                                            <input type="file" name="site_logo" class="custom-file-input" id="site-logo">
-                                            <label class="custom-file-label">Choose File</label>
-                                        </div>
-                                        <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
-                                    </div>
-                                </div>
-                                
-                                
-                            </div>
-                            <div class="card-footer bg-whitesmoke text-md-right">
-                                <button class="btn btn-primary" id="save-btn">Save Changes</button>
-                                <button class="btn btn-secondary" type="button">Reset</button>
-                            </div>
+                    <div class="card" id="settings-card">
+                        <div class="card-header">
+                            <h4>Oda Ayarları</h4>
                         </div>
-                    </form>
+                        <div class="card-body">
+
+
+                            <div class="form-group row align-items-center">
+
+
+                                <label for="site-title" class="form-control-label col-sm-3 text-md-right">Oda Seç:</label>
+                                <div class="col-sm-6 col-md-9">
+                                    <select name="site_title" class="form-control" id="site-title">
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center col-12">
+                                <label style="margin-left:-49px;" for="site-title" class="form-control-label col-sm-4 text-md-right">Oda Fiyatı:</label>
+                                <input style="margin-left:5px;" type="text" name="site_title" class="form-control col-4" id="site-title">
+                                <button style="margin-left:20px;" class="btn btn-primary col-4" id="save-btn">Fiyatı Güncelle</button>
+
+
+                            </div>
+                            <div class="form-group row align-items-center col-12">
+                                <label style="margin-left:-49px;" for="site-title" class="form-control-label col-sm-4 text-md-right">Oda Özelliği Ekle:</label>
+                                <button class="btn btn-primary" onclick="openEditModal()" style="margin-left:6px;">Özellik Ekle</button>
+                                <div class="modal fade" id="myModal" role="dialog" style="display:none">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: #6777ef; cursor: move;">
+                                                <h5 id="modalTitle" style="color: white; margin: 0; flex: 1;"></h5>
+                                            </div>
+                                            <div class="modal-body" id="Body"></div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" onclick="closeModal()">Kapat</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group row align-items-center">
+                                <label class="form-control-label col-sm-3 text-md-right">Oda Resimleri:</label>
+                                <div class="col-sm-6 col-md-9">
+                                    <div class="custom-file">
+                                        <button class="btn btn-primary" onclick="openPictureModal()" style="margin-left:6px;">Resim Ekle</button>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="card-footer bg-whitesmoke text-md-right">
+                            <button class="btn btn-primary" id="save-btn">Save Changes</button>
+                            <button class="btn btn-secondary" type="button">Reset</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 </div>
+<script>
+    document.getElementById("site-logo").addEventListener("change", function () {
+        var fileLabel = document.getElementById("file-label");
+        var files = this.files;
+        if (files.length > 0) {
+            var fileNames = Array.from(files).map(file => file.name).join(", ");
+            fileLabel.innerText = fileNames;
+        } else {
+            fileLabel.innerText = "Choose Files";
+        }
+    });
+</script>

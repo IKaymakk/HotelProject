@@ -132,5 +132,13 @@ namespace HotelProject.Controllers
 
             }
         }
+        public ActionResult frmAddFeature()
+        {
+            return View();
+        }
+        public ActionResult frmAddPicture()
+        {
+            return View();
+        }
     }
 }

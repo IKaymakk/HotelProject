@@ -582,3 +582,73 @@ $(function() {
     });
   }
 });
+
+
+function openEditModal(id) {
+    fetch(`/Admin/frmAddFeature?id=${id}`)
+        .then(response => response.text())
+        .then(html => {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('Body');
+
+            if (!modalTitle || !modalBody) {
+                console.error("Modal öðeleri bulunamadý!");
+                return;
+            }
+
+            modalTitle.textContent = 'Düzenle';
+            $('#modalTitle').text('Ekle');
+            modalBody.innerHTML = html;
+
+            const modal = document.getElementById('myModal');
+            if (modal) {
+                modal.style.display = 'block';
+                modal.classList.add('show');
+                document.body.classList.add('modal-open');
+            } else {
+                console.error("Modal bulunamadý!");
+            }
+
+            $("#ReservationId").val(id);
+            getReservationDetails();
+        })
+        .catch(error => console.error('Error loading modal content:', error));
+}
+function openPictureModal(id) {
+    fetch(`/Admin/frmAddPicture?id=${id}`)
+        .then(response => response.text())
+        .then(html => {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('Body');
+
+            if (!modalTitle || !modalBody) {
+                console.error("Modal öðeleri bulunamadý!");
+                return;
+            }
+
+            modalTitle.textContent = 'Düzenle';
+            $('#modalTitle').text('Ekle');
+            modalBody.innerHTML = html;
+
+            const modal = document.getElementById('myModal');
+            if (modal) {
+                modal.style.display = 'block';
+                modal.classList.add('show');
+                document.body.classList.add('modal-open');
+            } else {
+                console.error("Modal bulunamadý!");
+            }
+
+            $("#ReservationId").val(id);
+            getReservationDetails();
+        })
+        .catch(error => console.error('Error loading modal content:', error));
+}
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    if (modal) {
+        modal.style.display = 'none'; 
+        modal.classList.remove('show'); 
+        document.body.classList.remove('modal-open'); 
+    }
+}
