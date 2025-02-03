@@ -16,5 +16,13 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+        public ActionResult frmAddFeature()
+        {
+            return View();
+        }
+        public ActionResult frmAddPicture()
+        {
+            return View();
+        }
     }
 }
