@@ -2750,6 +2750,12 @@ body {
     font-weight: 400;
     font-family: 'Nunito', 'Segoe UI', arial;
     color: #6c757d;
+    
+
+
+    overflow-x: hidden;
+
+
 }
 
 a.bb {
@@ -3935,14 +3941,6 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
 
 
 
-
-
-
-
-
-
-
-
 #myModal {
     display: none;
     position: fixed;
@@ -3954,3 +3952,31 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     background-color: rgba(0, 0, 0, 0.5); /* Arka planı hafif karartma efekti */
     overflow: auto;
 }
+
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+    .image-wrapper img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.image-wrapper:hover .delete-btn {
+    display: block;
+}
+
+

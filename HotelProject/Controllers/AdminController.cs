@@ -19,6 +19,23 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+        public IActionResult SetSocialMedia()
+        {
+            return View();
+        }
+
+        public IActionResult SetPopularRoom()
+        {
+            return View();
+        }
+        public IActionResult SetContact()
+        {
+            return View();
+        }
+        public IActionResult SetAboutUs()
+        {
+            return View();
+        }
         public IActionResult RoomSet()
         {
             return View();

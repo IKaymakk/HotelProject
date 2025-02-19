@@ -21,8 +21,8 @@
                             <div class="form-group row align-items-center">
 
                                 <div class="card-header ">
-                                    <h4 style="padding-left:18px;">Oda Seç:</h4>
-                                    <div class="col-sm-6 col-md-3">
+                                    <h4 style="padding-left:30px;">Oda Seç:</h4>
+                                    <div class="col-sm-6 col-md-2">
                                         <select style="margin-left:23px;" name="site_title" class="form-control" id="site-title">
                                             <option>Option 1</option>
                                             <option>Option 2</option>
@@ -37,11 +37,11 @@
 
 
 
-                            <div class="form-group row align-items-center col-12">
+                            <div class="form-group row align-items-center col-6">
                                 <div class="card-header ">
-                                    <h4>Oda Fiyatı:</h4>
-                                    <input style="margin-left:25px; margin-right:40px;" type="text" name="site_title" class="form-control col-4" id="site-title">
-                                    <button class="btn btn-primary col-4" id="save-btn">Fiyatı Güncelle</button>
+                                    <h4 style="padding-left:25px;">Oda Fiyatı:</h4>
+                                    <input style="margin-left:25px; margin-right:40px;" type="text" name="site_title" class="form-control col-2" id="site-title">
+                                    <button class="btn btn-primary col-3" id="save-btn">Fiyatı Güncelle</button>
 
                                 </div>
 
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group row align-items-center col-12">
                                 <div class="card-header ">
-                                    <h4>Oda Özelliği Ekle:</h4>
+                                    <h4 style="padding-left:25px;">Oda Özelliği Ekle:</h4>
                                     <button class="btn btn-primary" onclick="openEditModal()" style="margin-left:26px;">Özellik Ekle</button>
 
                                 </div>
@@ -71,61 +71,71 @@
                             </div>
 
                             <div class="form-group row align-items-center">
-                                <div class="card-header ">
-                                    <h4 style="margin-left:14px;">Oda Resimleri:</h4>
+                                <div class="card-header">
+                                    <h4 style="margin-left:40px;">Oda Resimleri:</h4>
                                     <button class="btn btn-primary" onclick="openPictureModal()" style="margin-left:12px;">Resim Ekle</button>
-
                                 </div>
+
                                 <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="~/images/attractions/img-1.jpg" class="img-fluid">
+                                    <div class="row" id="imageContainer">
+                                        <!-- İlk 4 resim -->
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box">
+                                            <div class="image-wrapper">
+                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
+                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="~/images/avatar/img-5.jpg" class="img-fluid">
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box">
+                                            <div class="image-wrapper">
+                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
+                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image3.jpg" class="img-fluid">
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box">
+                                            <div class="image-wrapper">
+                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
+                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="~/images/about/img-1.jpg" class="img-fluid">
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box">
+                                            <div class="image-wrapper">
+                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
+                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image5.jpg" class="img-fluid">
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box hidden">
+                                            <div class="image-wrapper">
+                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
+                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image6.jpg" class="img-fluid">
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box hidden">
+                                            <div class="image-wrapper">
+                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
+                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image7.jpg" class="img-fluid">
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box hidden">
+                                            <div class="image-wrapper">
+                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
+                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image8.jpg" class="img-fluid">
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image9.jpg" class="img-fluid">
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image10.jpg" class="img-fluid">
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image11.jpg" class="img-fluid">
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4">
-                                            <img src="image12.jpg" class="img-fluid">
+                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box hidden">
+                                            <div class="image-wrapper">
+                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
+                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
 
 
 
                         </div>
-                        <div class="card-footer bg-whitesmoke text-md-right">
-                            <button class="btn btn-primary" id="save-btn">Save Changes</button>
-                            <button class="btn btn-secondary" type="button">Reset</button>
-                        </div>
+                       
                     </div>
 
                 </div>
@@ -144,4 +154,17 @@
             fileLabel.innerText = "Choose Files";
         }
     });
+    $(document).ready(function () {
+      
+
+ 
+        $(".delete-btn").click(function () {
+            var imageBox = $(this).closest('.image-box');
+            imageBox.fadeOut(300, function () {
+                imageBox.remove(); 
+            });
+        });
+    });
+
+
 </script>
