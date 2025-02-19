@@ -13,5 +13,6 @@ namespace DataAccessLayer
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomFeatures> RoomFeatures { get; set; }
         public DbSet<RoomImages> RoomImages { get; set; }
+        public DbSet<RoomCategory> RoomCategories { get; set; }
     }
 }

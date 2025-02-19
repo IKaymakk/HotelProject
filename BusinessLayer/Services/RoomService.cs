@@ -180,6 +180,33 @@ namespace BusinessLayer.Services
             }
         }
 
+        public List<Room> GetRooms()
+        {
+            try
+            {
+                var rooms = _context.Rooms.ToList();
+                return rooms;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting room: ", ex);
+                return null;
+            }
+        }  
+        public List<RoomCategory> GetRoomCategories()
+        {
+            try
+            {
+                var categories = _context.RoomCategories.ToList();
+                return categories;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting categories: ", ex);
+                return null;
+            }
+        }
+
 
     }
 }

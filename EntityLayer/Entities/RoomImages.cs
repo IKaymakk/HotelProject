@@ -18,5 +18,8 @@ namespace EntityLayer.Entities
         public string FileName { get; set; }
         public byte[] FileData { get; set; }
         public bool isDeleted { get; set; }
+
+        [ForeignKey("RoomId")]
+        public virtual Room Room { get; set; }
     }
 }

@@ -5,10 +5,9 @@
 <div class="form-group row align-items-center">
     <label class="form-control-label col-sm-3 text-md-right">Resim Seçin:</label>
     <div class="col-sm-8 col-md-8 d-flex align-items-center">
-        <div class="custom-file mr-2">
-            <input type="file" name="site_logo[]" class="custom-file-input" id="site-logo" multiple>
-            <label class="custom-file-label" id="file-label">Choose Files</label>
-        </div>
-        <button type="button" class="btn btn-primary">Yükle</button>
+        <input type="file" name="imageFiles" class="custom-file-input" id="imageFiles" multiple>
+        <button type="button" class="btn btn-primary" id="uploadBtn" onclick="insertRoomImages()">Yükle</button>
     </div>
 </div>
+
+<div id="previewContainer" class="mt-3"></div>

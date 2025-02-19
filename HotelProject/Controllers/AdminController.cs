@@ -38,8 +38,26 @@ namespace HotelProject.Controllers
         }
         public IActionResult RoomSet()
         {
-            return View();
+            try
+            {
+                var result = _roomService.GetRooms();
+
+                if (result != null)
+                {
+                    return View(result); 
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting rooms: ", ex);
+                return View();
+            }
         }
+
         public IActionResult ResetPassword()
         {
             return View();
@@ -157,9 +175,29 @@ namespace HotelProject.Controllers
         {
             return View();
         }
-        public ActionResult frmAddRoom()
+
+        public IActionResult frmAddRoom()
         {
-            return View();
+            try
+            {
+                var result = _roomService.GetRoomCategories();
+
+                if (result != null)
+                {
+                    return View(result);
+                    ViewBag.Categories = result;
+                }
+                else
+                {
+                    return View("Error", "No rooms available");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting rooms: ", ex);
+                return View("Error", ex.Message);
+            }
         }
+
     }
 }

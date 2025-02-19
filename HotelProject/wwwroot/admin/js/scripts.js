@@ -614,8 +614,8 @@ function openEditModal(id) {
         })
         .catch(error => console.error('Error loading modal content:', error));
 }
-function openPictureModal(id) {
-    fetch(`/Admin/frmAddPicture?id=${id}`)
+function openPictureModal() {
+    fetch(`/Admin/frmAddPicture`)
         .then(response => response.text())
         .then(html => {
             const modalTitle = document.getElementById('modalTitle');
@@ -638,14 +638,11 @@ function openPictureModal(id) {
             } else {
                 console.error("Modal bulunamadý!");
             }
-
-            $("#ReservationId").val(id);
-            getReservationDetails();
         })
         .catch(error => console.error('Error loading modal content:', error));
 }
-function openRoomModal(id) {
-    fetch(`/Admin/frmAddRoom?id=${id}`)
+function openRoomModal() {
+    fetch(`/Admin/frmAddRoom`)
         .then(response => response.text())
         .then(html => {
             const modalTitle = document.getElementById('modalTitle');
@@ -669,8 +666,6 @@ function openRoomModal(id) {
                 console.error("Modal bulunamadý!");
             }
 
-            $("#ReservationId").val(id);
-            getReservationDetails();
         })
         .catch(error => console.error('Error loading modal content:', error));
 }

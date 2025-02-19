@@ -1,7 +1,38 @@
-﻿function insertRoom() {
+﻿
+$(document).ready(function () {
+    // FilePond ile dosya yüklemeyi başlat
+    const inputElement = document.querySelector('#imageFiles');
+    const pond = FilePond.create(inputElement, {
+        allowMultiple: true,  // Birden fazla dosya seçmeye izin ver
+        imagePreviewHeight: 100, // Önizleme resminin yüksekliği
+        imageCropAspectRatio: '1:1', // Resmin oranını 1:1 yaparak kare göster
+        imageResizeTargetWidth: 100, // Resmin önizleme genişliği
+        imageResizeTargetHeight: 100, // Resmin önizleme yüksekliği
+    });
+
+    // Dosya seçildikçe önizlemeleri gösterir
+    inputElement.addEventListener('change', function (event) {
+        var files = event.target.files;
+        var previewContainer = $("#previewContainer");
+        previewContainer.empty(); // Önizleme alanını temizle
+
+        // Dosya seçildikçe, her birini FilePond'a yükle
+        for (var i = 0; i < files.length; i++) {
+            // FilePond ile resim önizlemesi
+            pond.addFile(files[i]).then(function (file) {
+                // FilePond kendiliğinden önizlemeyi oluşturacak
+            });
+        }
+    });
+});
+
+
+
+function insertRoom() {
     var roomData = {
         Name: $('#roomName').val(),
-        Price: $('#roomPrice').val(),
+        Price: parseInt($('#roomPrice').val(), 10),
+        CategoryId: parseInt($('#category').val(), 10),
     };
 
     $.ajax({
@@ -32,7 +63,7 @@ function updateRoom() {
 
     $.ajax({
         type: 'POST',
-        url: '/Admin/UpdateRoom',  
+        url: '/Admin/UpdateRoom',
         data: JSON.stringify(roomData),
         contentType: 'application/json',
         success: function (response) {
@@ -54,12 +85,12 @@ function insertOrUpdateFeatures() {
     var featureData = {
         RoomId: $('#roomId').val(),
         FeatureName: $('#featureName').val(),
-       FeatureId: $('#featureId').val(),
+        FeatureId: $('#featureId').val(),
     };
 
     $.ajax({
         type: 'POST',
-        url: '/Admin/InsertOrUpdateFeatures',  
+        url: '/Admin/InsertOrUpdateFeatures',
         data: JSON.stringify(featureData),
         contentType: 'application/json',
         success: function (response) {
@@ -80,7 +111,7 @@ function deleteFeatures() {
     var featureId = $('#featureId').val()
     $.ajax({
         type: 'POST',
-        url: '/Admin/DeleteFeatures',  
+        url: '/Admin/DeleteFeatures',
         data: JSON.stringify({ FeatureId: featureId }),
         contentType: 'application/json',
         success: function (response) {
@@ -97,9 +128,10 @@ function deleteFeatures() {
 }
 
 
-function insertRoomImages(roomId) {
+function insertRoomImages() {
+    var roomId = $("#roomNumber").val()
     var formData = new FormData();
-    var files = $("#imageFiles")[0].files; 
+    var files = $("#imageFiles")[0].files;
 
     if (files.length === 0) {
         alert("Lütfen en az bir dosya seçin!");
@@ -114,7 +146,7 @@ function insertRoomImages(roomId) {
         formData.append("imageFiles", files[i]);
     }
 
-    formData.append("roomId", 1);
+    formData.append("roomId", roomId);
 
     $.ajax({
         type: 'POST',
@@ -154,3 +186,6 @@ function deleteRoomImage(imageId) {
         }
     });
 }
+
+
+
