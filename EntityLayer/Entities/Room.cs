@@ -15,8 +15,13 @@ namespace EntityLayer.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
+        public string? Description { get; set; }
+        public int CategoryId { get; set; }
+        public string? ImageBase64 { get; set; }
         public bool isDeleted { get; set; }
+        public bool isMainPage { get; set; }
 
+        public List<RoomImages> RoomImages { get; set; }
     }
 }

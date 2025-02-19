@@ -1,16 +1,15 @@
-﻿@{
+﻿@using EntityLayer.Entities
+@{
     Layout = "_AdminLayout";
 }
+@model List<Room>
+
+
 <div class="main-content">
     <section class="section">
-
-
         <div class="section-body">
-
-
             <div id="output-status"></div>
             <div class="row">
-
                 <div class="col-md-12">
 
                     <div class="card" id="settings-card">
@@ -23,10 +22,12 @@
                                 <div class="card-header ">
                                     <h4 style="padding-left:18px;">Oda Seç:</h4>
                                     <div class="col-sm-6 col-md-3">
-                                        <select style="margin-left:23px;" name="site_title" class="form-control" id="site-title">
-                                            <option>Option 1</option>
-                                            <option>Option 2</option>
-                                            <option>Option 3</option>
+                                        <select style="margin-left:23px;" name="roomNumber" class="form-control" id="roomNumber">
+                                            @foreach (var item in Model ?? Enumerable.Empty<Room>())
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+
                                         </select>
                                     </div>
                                     <button onclick="openRoomModal()" style="margin-left:750px;" class="btn btn-primary" id="save-btn">Oda Ekle</button>

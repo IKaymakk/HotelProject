@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using EntityLayer.Entities
+@{
+    var Categories = ViewBag.Categories as List<RoomCategory>;
+}
+
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8">
@@ -65,8 +70,13 @@
                                 <a href="/Home/Room">Odalar <span class="fa fa-caret-down"></span></a>
                                 <ul class="sub-menu">
 
-                                    <li><a href="">Room 6</a></li>
-                                    <li><a href="/Home/RoomDetails">Room Detail</a></li>
+
+                                    @foreach (var category in Categories ?? Enumerable.Empty<RoomCategory>())
+                                        {
+                                        <li><a href="">@category.Name</a></li>
+                                        }
+                                 
+                               @*      <li><a href="/Home/RoomDetails">Room Detail</a></li> *@
                                 </ul>
                             </li>
                            

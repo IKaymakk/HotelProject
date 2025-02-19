@@ -1,10 +1,37 @@
-﻿@{
+﻿@using EntityLayer.Entities
+
+@{
     Layout = null;
 }
+@model List<RoomCategory>
 <div class="form-group row align-items-center col-10">
-    <label style="margin-left:-49px;" for="site-title" class="form-control-label col-sm-3 text-md-right">Oda Fiyatı:</label>
-    <input style="margin-left:5px;" type="text" name="site_title" class="form-control col-3" id="site-title">
-    <label style="margin:-16px;" for="site-title" class="form-control-label col-sm-3 text-md-right">Oda Numarası:</label>
-    <input style="margin-left:5px;" type="text" name="site_title" class="form-control col-3" id="site-title">
-    <button style="margin-left:20px;" class="btn btn-primary col-1" id="save-btn">Ekle</button>
+    <label for="roomName" class="form-control-label col-sm-3 text-md-right">Oda Numarası:</label>
+    <div class="col-sm-3">
+        <input type="text" name="roomName" class="form-control" id="roomName">
+    </div>
+</div>
+
+<div class="form-group row align-items-center col-10">
+    <label for="roomPrice" class="form-control-label col-sm-3 text-md-right">Oda Fiyatı:</label>
+    <div class="col-sm-3">
+        <input type="text" name="roomPrice" class="form-control" id="roomPrice">
+    </div>
+</div>
+
+<div class="form-group row align-items-center col-10">
+    <label for="category" class="form-control-label col-sm-3 text-md-right">Kategori:</label>
+    <div class="col-sm-3">
+        <select name="category" class="form-control" id="category">
+            @foreach (var item in Model)
+            {
+                <option value="@item.Id">@item.Name</option>  
+            }
+        </select>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-6 offset-sm-3">
+        <button class="btn btn-primary" onclick="insertRoom()" id="save-btn">Ekle</button>
+    </div>
 </div>

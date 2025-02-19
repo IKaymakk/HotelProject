@@ -1,8 +1,10 @@
-﻿@{
+﻿@using EntityLayer.Entities
+
+@{
     ViewData["Title"] = "Home Page";
 }
+@model List<Room>
 
-<!-- BANNER SLIDER -->
 <section class="section-slider">
     <h1 class="element-invisible">Slider</h1>
     <div id="slider-revolution">
@@ -59,7 +61,7 @@
                         <input type="text" class="awe-calendar from" placeholder="Giriş Tarihi">
                         <input type="text" class="awe-calendar to" placeholder="Çıkış Tarihi">
 
-                        
+
                         <div class="vailability-submit">
                             <button class="awe-btn awe-btn-13">ODAYI BUL</button>
                         </div>
@@ -81,78 +83,33 @@
             <div class="accomd-modations-content_1">
 
                 <div class="accomd-modations-slide_1">
+                    @foreach (var item in Model ?? Enumerable.Empty<Room>())
+                    {
+                        <div class="accomd-modations-room_1">
+                            <div class="img">
+                                @if (!string.IsNullOrEmpty(item.ImageBase64))
+                                {
+                                    <a href="#"><img src="data:image/jpeg;base64,@item.ImageBase64" alt="@item.Name"></a>
+                                }
+                                else
+                                {
+                                    <a href="#"><img src="~/images/room/img-2.jpg" alt="@item.Name"></a> 
+                                }
+                            </div>
 
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1">
-
-                        <div class="img">
-                            <a href="#"><img src="~/images/room/img-2.jpg" alt=""></a>
-                        </div>
-
-                        <div class="text">
-                            <h2><a href="#">Luxury Room</a></h2>
-                            <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout">$320</span> /days
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                            <div class="text">
+                                <h2><a href="#">@item.Name</a></h2>
+                                <p class="desc">@item.Description</p>
+                                <div class="wrap-price">
+                                    <p class="price">
+                                        <span class="amount">@item.Price</span> /gün
+                                    </p>
+                                    <a href="#" class="awe-btn awe-btn-default">Detaylar</a>
+                                </div>
                             </div>
                         </div>
+                    }
 
-                    </div>
-                    <!-- END / ITEM -->
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1">
-                        <div class="img">
-                            <a href="#"><img src="~/images/room/img-2.jpg" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="#">Luxury Room</a></h2>
-                            <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout">$320</span> /days
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END / ITEM -->
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1">
-                        <div class="img">
-                            <a href="#"><img src="~/images/room/img-2.jpg" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="#">Luxury Room</a></h2>
-                            <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout">$320</span> /days
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END / ITEM -->
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1">
-                        <div class="img">
-                            <a href="#"><img src="~/images/room/img-2.jpg" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="#">Luxury Room</a></h2>
-                            <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout">$320</span> /days
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END / ITEM -->
 
                 </div>
 
@@ -255,7 +212,7 @@
                         <a href="#" class="awe-btn awe-btn-default">READ MORE</a>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </section>

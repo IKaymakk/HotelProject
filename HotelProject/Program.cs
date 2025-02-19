@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<RoomService>();
+builder.Services.AddScoped<HomeService>();
 
 var app = builder.Build();
 
