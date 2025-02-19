@@ -1,7 +1,6 @@
 ﻿using BusinessLayer.Services;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelProject.Controllers
 {
@@ -44,7 +43,7 @@ namespace HotelProject.Controllers
 
                 if (result != null)
                 {
-                    return View(result); 
+                    return View(result);
                 }
                 else
                 {
@@ -83,7 +82,7 @@ namespace HotelProject.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateRoom([FromBody]  Room model)
+        public JsonResult UpdateRoom([FromBody] Room model)
         {
             try
             {
@@ -132,15 +131,27 @@ namespace HotelProject.Controllers
         {
             try
             {
-                var result = _roomService.InsertRoomImages(imageFiles, roomId);
-                if (result == "Success")
+                foreach (var imageFile in imageFiles)
                 {
-                    return Ok(new { success = true, message = "Images inserted successfully" });
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        imageFile.CopyTo(memoryStream);
+
+
+                        var roomImage = new RoomImages
+                        {
+                            RoomId = roomId,
+                            FileName = imageFile.FileName,
+                            FileType = imageFile.ContentType,
+                            FileData = memoryStream.ToArray()
+                        };
+
+                        _roomService.InsertRoomImages(roomImage);
+                    }
                 }
-                else
-                {
-                    return BadRequest(new { success = false, message = result });
-                }
+
+                return Ok(new { success = true, message = "Images inserted successfully" });
             }
             catch (Exception ex)
             {

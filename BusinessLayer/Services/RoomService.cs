@@ -1,14 +1,6 @@
 ﻿using DataAccessLayer;
 using EntityLayer.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Services
 {
@@ -121,39 +113,10 @@ namespace BusinessLayer.Services
             }
         }
 
-        public string InsertRoomImages(List<IFormFile> imageFiles, int roomId)
+        public void InsertRoomImages(RoomImages image)
         {
-            try
-            {
-                foreach (var imageFile in imageFiles)
-                {
-                    if (imageFile != null && imageFile.Length > 0)
-                    {
-                        var roomImage = new RoomImages
-                        {
-                            RoomId = roomId,
-                            FileName = imageFile.FileName,
-                            FileType = imageFile.ContentType
-                        };
-
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            imageFile.CopyTo(memoryStream);
-                            roomImage.FileData = memoryStream.ToArray();
-                        }
-
-                        _context.RoomImages.Add(roomImage);
-                    }
-                }
-
-                _context.SaveChanges();
-                return "Success";
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error inserting room images: ", ex);
-                return "Error: " + ex.Message;
-            }
+            _context.RoomImages.Add(image);
+            _context.SaveChanges();
         }
 
         public string DeleteRoomImages(int ImageId)
@@ -192,7 +155,7 @@ namespace BusinessLayer.Services
                 _logger.LogError("Error getting room: ", ex);
                 return null;
             }
-        }  
+        }
         public List<RoomCategory> GetRoomCategories()
         {
             try
