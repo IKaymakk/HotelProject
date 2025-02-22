@@ -1,5 +1,9 @@
-﻿using DataAccessLayer;
+﻿using AutoMapper;
+using AutoMapper.Features;
+using DataAccessLayer.DataAccessLayer;
+using EntityLayer.DTO;
 using EntityLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace BusinessLayer.Services
@@ -8,11 +12,13 @@ namespace BusinessLayer.Services
     {
         private readonly ILogger<RoomService> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public RoomService(ILogger<RoomService> logger, ApplicationDbContext context)
+        public RoomService(ILogger<RoomService> logger, ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
 
         }
 
@@ -63,37 +69,26 @@ namespace BusinessLayer.Services
             }
         }
 
-        public string InsertOrUpdateFeatures(RoomFeatures model)
+        public bool InsertFeatures(RoomFeatures model)
         {
             try
             {
-                var existRecord = _context.RoomFeatures.FirstOrDefault(x => x.RoomId == model.RoomId);
-
-                if (existRecord != null)
-                {
-                    existRecord.Features = model.Features;
-                    _context.RoomFeatures.Update(existRecord);
-                }
-                else
-                {
-                    _context.RoomFeatures.Add(model);
-                }
-
+                _context.RoomFeatures.Add(model);
                 _context.SaveChanges();
 
-                return "Success";
+                return true;
             }
             catch (Exception ex)
             {
                 _logger.LogError("Error Inserting Or Updating features : ", ex);
-                return "Error: " + ex.Message;
+                return false;
             }
         }
-        public string DeleteFeatures(int roomId)
+        public bool DeleteFeatures(int FeatureId)
         {
             try
             {
-                var feature = _context.RoomFeatures.FirstOrDefault(x => x.RoomId == roomId);
+                var feature = _context.RoomFeatures.FirstOrDefault(x => x.FeatureId == FeatureId);
 
                 if (feature != null)
                 {
@@ -101,10 +96,56 @@ namespace BusinessLayer.Services
                     _context.RoomFeatures.Update(feature);
                     _context.SaveChanges();
 
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error deleting features: ", ex);
+                return false;
+            }
+        }
+        public bool UpdateFeatures(RoomFeatureDTO dto)
+        {
+            try
+            {
+                var feature = _context.RoomFeatures.FirstOrDefault(x => x.FeatureId == dto.FeatureId);
+
+                if (feature != null)
+                {
+                    feature.Features = dto.Features;
+                    _context.RoomFeatures.Update(feature);
+                    _context.SaveChanges();
+
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error deleting features: ", ex);
+                return false;
+            }
+        }
+        public string DeleteImage(int ImageId)
+        {
+            try
+            {
+                var image = _context.RoomImages.FirstOrDefault(x => x.ImageId == ImageId);
+
+                if (image != null)
+                {
+                    image.isDeleted = true;
+                    _context.RoomImages.Update(image);
+                    _context.SaveChanges();
+
                     return "Success";
                 }
 
-                return "Feature not found";
+                return "Image not found";
             }
             catch (Exception ex)
             {
@@ -143,19 +184,44 @@ namespace BusinessLayer.Services
             }
         }
 
-        public List<Room> GetRooms()
+
+
+        public List<RoomCategoryDTO> GetCategoriesWithRooms()
+        {
+            var categories = _context.RoomCategories
+                .Include(c => c.Rooms.Where(r => !r.isDeleted))
+                    .ThenInclude(r => r.RoomImages.Where(img => !img.isDeleted))
+                .Include(c => c.Rooms.Where(r => !r.isDeleted))
+                    .ThenInclude(r => r.RoomFeatures.Where(f => !f.isDeleted))
+                .ToList();
+
+            var categoriesDto = _mapper.Map<List<RoomCategoryDTO>>(categories);
+            return categoriesDto;
+        }
+
+        public List<RoomDTO> GetRooms()
         {
             try
             {
-                var rooms = _context.Rooms.ToList();
-                return rooms;
+                var rooms = _context.Rooms
+                    .Where(x => !x.isDeleted)
+                    .Include(x => x.RoomImages.Where(img => !img.isDeleted))
+                    .Include(x => x.RoomFeatures.Where(f => !f.isDeleted))
+                    .ToList();
+
+                var roomDTOs = _mapper.Map<List<RoomDTO>>(rooms);
+
+                return roomDTOs;
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error getting room: ", ex);
+                _logger.LogError("Error getting rooms: ", ex);
                 return null;
             }
         }
+
+
+
         public List<RoomCategory> GetRoomCategories()
         {
             try
@@ -170,6 +236,29 @@ namespace BusinessLayer.Services
             }
         }
 
+        public RoomDTO GetRoomDetail(int roomId)
+        {
+            try
+            {
+                var room = _context.Rooms
+                  .Where(x => !x.isDeleted)
+                  .Include(x => x.RoomImages.Where(img => !img.isDeleted))
+                  .Include(x => x.RoomFeatures.Where(f => !f.isDeleted))
+                  .FirstOrDefault(x => x.Id == roomId);
+
+
+                if (room == null)
+                    return null;
+
+                var roomDTO = _mapper.Map<RoomDTO>(room);
+
+                return roomDTO;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting room details", ex);
+            }
+        }
 
     }
 }

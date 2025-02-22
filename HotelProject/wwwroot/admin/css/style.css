@@ -803,11 +803,11 @@ select.form-control:not([size]):not([multiple]) {
         position: static;
     }
 
-    .card .card-body {
+/*    .card .card-body {
         padding-top: 20px;
         padding-bottom: 20px;
         height: 620px;
-    }
+    }*/
 
         .card .card-body .section-title {
             margin: 30px 0 10px 0;
@@ -1361,7 +1361,7 @@ table tr:hover .table-links {
 
 .modal-content {
     width: 800px;
-    height: 600px;
+/*    height: 600px;*/
     border: none;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
 }
@@ -3980,3 +3980,35 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
 }
 
 
+
+#loadingDiv {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

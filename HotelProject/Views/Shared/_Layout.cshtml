@@ -34,7 +34,10 @@
 </head>
 <body>
     <div id="page-wrap">
-
+        <div id="loadingDiv" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+      
         <header id="header" class="header-v2">
 
             <!-- HEADER TOP -->
@@ -69,7 +72,7 @@
                             <li>
                                 <a href="/Home/Room">Odalar <span class="fa fa-caret-down"></span></a>
                                 <ul class="sub-menu">
-@*                                     <li><a href="/Home/RoomDetails">Room Detail</a></li>
+                                    @*                                     <li><a href="/Home/RoomDetails">Room Detail</a></li>
  *@                                    <li><a href="/Home/DoubleArchRoom">Duble Yatak Kemer Odalar</a></li>
                                     <li><a href="/Home/StandartArchRoom">Standart Kemer Odalar</a></li>
                                     <li><a href="/Home/DeluxeRoom">Deluxe Odalar</a></li>
@@ -79,30 +82,31 @@
 
                                 </ul>
                             </li>
-                           
+                            <li><a href="/Login/Index">Login</a></li>
+                            <li><a href="/Login/Register">Register</a></li>
 
                             @* <li>
                                 <a href="/Home/Activity">Aktiviteler <span class="fa fa-caret-down"></span></a>
                                 <ul class="sub-menu">
                                     <li>
                                         <a href="#">Guest Book <span ></span></a>
-                                        
+
                                     </li>
 
                                     <li>
                                         <a href="#">Event <span ></span></a>
-                                        
+
                                     </li>
                                     <li>
                                         <a href="attractions.html">Attractions</a>
                                     </li>
                                     <li>
                                         <a href="#">Term Condition <span ></span></a>
-                                        
+
                                     </li>
                                     <li>
                                         <a href="/Home/Activitys">Activiti <span ></span></a>
-                                        
+
                                     </li>
                                     <li><a href="check-out.html">Check Out</a></li>
                                     <li><a href="shortcode.html">ShortCode</a></li>
@@ -110,8 +114,8 @@
                                     <li><a href="comingsoon.html">Comming Soon</a></li>
                                 </ul>
                             </li> *@
-                            
-                            
+
+
                             <li><a href="/Home/Contact">İletişim</a></li>
                         </ul>
                     </nav>
@@ -227,7 +231,7 @@
     <script type="text/javascript" src="~/js/SmoothScroll.js"></script>
     <script type="text/javascript" src="~/js/scripts.js"></script>
     <script type="text/javascript" src="~/js/datepicker.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

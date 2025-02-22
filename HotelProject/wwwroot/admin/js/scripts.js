@@ -1,4 +1,4 @@
-"use strict";
+ï»¿"use strict";
 
 // ChartJS
 if(window.Chart) {
@@ -584,19 +584,48 @@ $(function() {
 });
 
 
-function openEditModal(id) {
-    fetch(`/Admin/frmAddFeature?id=${id}`)
+function openEditModal() {
+    fetch(`/Admin/frmEditFeature`)
         .then(response => response.text())
         .then(html => {
             const modalTitle = document.getElementById('modalTitle');
             const modalBody = document.getElementById('Body');
 
             if (!modalTitle || !modalBody) {
-                console.error("Modal öðeleri bulunamadý!");
+                console.error("Modal Ã¶geleri bulunamadÄ±!");
                 return;
             }
 
-            modalTitle.textContent = 'Düzenle';
+            modalTitle.textContent = 'DÃ¼zenle';
+            $('#modalTitle').text('DÃ¼zenle');
+            modalBody.innerHTML = html;
+
+            const modal = document.getElementById('myModal');
+            if (modal) {
+                modal.style.display = 'block';
+                modal.classList.add('show');
+                document.body.classList.add('modal-open');
+            } else {
+                console.error("Modal bulunamadÄ±!");
+            }
+
+            GetRoomDetail("Feature")
+        })
+        .catch(error => console.error('Error loading modal content:', error));
+}
+function openAddFeatureModal() {
+    fetch(`/Admin/frmAddFeature`)
+        .then(response => response.text())
+        .then(html => {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('Body');
+
+            if (!modalTitle || !modalBody) {
+                console.error("Modal Ã¶geleri bulunamadÄ±!");
+                return;
+            }
+
+            modalTitle.textContent = 'DÃ¼zenle';
             $('#modalTitle').text('Ekle');
             modalBody.innerHTML = html;
 
@@ -606,11 +635,8 @@ function openEditModal(id) {
                 modal.classList.add('show');
                 document.body.classList.add('modal-open');
             } else {
-                console.error("Modal bulunamadý!");
+                console.error("Modal bulunamadÄ±!");
             }
-
-            $("#ReservationId").val(id);
-            getReservationDetails();
         })
         .catch(error => console.error('Error loading modal content:', error));
 }
@@ -622,11 +648,11 @@ function openPictureModal() {
             const modalBody = document.getElementById('Body');
 
             if (!modalTitle || !modalBody) {
-                console.error("Modal öðeleri bulunamadý!");
+                console.error("Modal Ã¶Ã°eleri bulunamadÃ½!");
                 return;
             }
 
-            modalTitle.textContent = 'Düzenle';
+            modalTitle.textContent = 'DÃ¼zenle';
             $('#modalTitle').text('Ekle');
             modalBody.innerHTML = html;
 
@@ -636,7 +662,7 @@ function openPictureModal() {
                 modal.classList.add('show');
                 document.body.classList.add('modal-open');
             } else {
-                console.error("Modal bulunamadý!");
+                console.error("Modal bulunamadÃ½!");
             }
         })
         .catch(error => console.error('Error loading modal content:', error));
@@ -649,11 +675,11 @@ function openRoomModal() {
             const modalBody = document.getElementById('Body');
 
             if (!modalTitle || !modalBody) {
-                console.error("Modal öðeleri bulunamadý!");
+                console.error("Modal Ã¶Ã°eleri bulunamadÃ½!");
                 return;
             }
 
-            modalTitle.textContent = 'Düzenle';
+            modalTitle.textContent = 'DÃ¼zenle';
             $('#modalTitle').text('Ekle');
             modalBody.innerHTML = html;
 
@@ -663,7 +689,7 @@ function openRoomModal() {
                 modal.classList.add('show');
                 document.body.classList.add('modal-open');
             } else {
-                console.error("Modal bulunamadý!");
+                console.error("Modal bulunamadÃ½!");
             }
 
         })

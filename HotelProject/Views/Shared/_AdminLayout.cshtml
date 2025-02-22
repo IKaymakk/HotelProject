@@ -27,7 +27,22 @@
 </head>
 <body>
     <div id="page-wrap">
-
+        <div id="loadingDiv" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+        <div class="modal fade" id="myModal" role="dialog" style="display:none">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #6777ef; cursor: move;">
+                        <h5 id="modalTitle" style="color: white; margin: 0; flex: 1;"></h5>
+                    </div>
+                    <div class="modal-body" id="Body"></div>
+@*                     <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="closeModal()">Kapat</button>
+                    </div> *@
+                </div>
+            </div>
+        </div>
         <header id="header" class="header-v2">
             <div id="app">
                 <div class="main-wrapper main-wrapper-1">
@@ -132,9 +147,14 @@
                                     <a href="/Admin/SetSocialMedia" class="nav-link "><i class="fa-solid fa-gears"></i> <span>Sosyal Medya Ayarları</span></a>
 
                                 </li>
-                                
 
-                            
+
+                                <li>
+                                    <a class="nav-link text-white bg-danger px-3 py-2 rounded" href="javascript:void(0);" onclick="Logout()">
+                                        <i class="fa-solid fa-right-from-bracket"></i> <span>Çıkış Yap</span>
+                                    </a>
+                                </li>
+
                         </aside>
                     </div>
                 </div>
@@ -171,17 +191,11 @@
     <script type="text/javascript" src="~/admin/js/cleave.min.js"></script>
     <script type="text/javascript" src="~/admin/js/forms-advanced-forms.js"></script>
     <script type="text/javascript" src="~/admin/js/stisla.js"></script>
-
-
-
+    <script type="text/javascript" src="~/Jquery/Login.js"></script>
     <script type="text/javascript" src="~/admin/js/scripts.js"></script>
+    <script type="text/javascript" src="~/Jquery/Room.js" asp-append-version="true"></script>
 
-
-
-    
-    <script type="text/javascript" src="~/Jquery/Room.js"></script>
-
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 
 

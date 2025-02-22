@@ -1,0 +1,29 @@
+﻿@model RegisterViewModel
+@{
+    Layout = "_LoginLayout";
+}
+
+<form id="registerForm" class="needs-validation">
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" for="Email" name="Email" required />
+        <span class="text-danger" for="Email"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Şifre</label>
+        <input type="password" class="form-control" for="Password" name="Password" required />
+        <span class="text-danger" for="Password"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ConfirmPassword">Şifreyi Onayla</label>
+        <input type="password" class="form-control" for="ConfirmPassword" name="ConfirmPassword" required />
+        <span class="text-danger" for="ConfirmPassword"></span>
+    </div>
+
+    <button type="button" onclick="Register()" class="btn btn-primary">Kayıt Ol</button>
+    <div id="registerErrorMessage" class="alert alert-danger d-none"></div>
+
+</form>
+

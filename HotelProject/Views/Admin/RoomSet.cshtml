@@ -1,8 +1,10 @@
-﻿@using EntityLayer.Entities
+﻿@using EntityLayer.DTO
+@model List<RoomDTO>
+
 @{
     Layout = "_AdminLayout";
+    var firstRoom = Model.FirstOrDefault();
 }
-@model List<Room>
 
 
 <div class="main-content">
@@ -22,52 +24,66 @@
                                 <div class="card-header ">
                                     <h4 style="padding-left:30px;">Oda Seç:</h4>
                                     <div class="col-sm-6 col-md-2">
-                                        <select style="margin-left:23px;" name="site_title" class="form-control" id="site-title">
-                                            <option>Option 1</option>
-                                            <option>Option 2</option>
-                                            <option>Option 3</option>
+                                        <select style="margin-left:23px;" name="site_title" class="form-control" id="roomNumber" onchange="GetRoomDetail('General')">
+                                            @foreach (var room in Model)
+                                            {
+                                                <option value="@room.Id">@room.Name</option>
+                                            }
                                         </select>
                                     </div>
                                     <button onclick="openRoomModal()" style="margin-left:750px;" class="btn btn-primary" id="save-btn">Oda Ekle</button>
 
                                 </div>
-                                
-                            </div>
-
-
-
-                            <div class="form-group row align-items-center col-6">
-                                <div class="card-header ">
-                                    <h4 style="padding-left:25px;">Oda Fiyatı:</h4>
-                                    <input style="margin-left:25px; margin-right:40px;" type="text" name="site_title" class="form-control col-2" id="site-title">
-                                    <button class="btn btn-primary col-3" id="save-btn">Fiyatı Güncelle</button>
-
-                                </div>
-
 
                             </div>
-                            <div class="form-group row align-items-center col-12">
-                                <div class="card-header ">
-                                    <h4 style="padding-left:25px;">Oda Özelliği Ekle:</h4>
-                                    <button class="btn btn-primary" onclick="openEditModal()" style="margin-left:26px;">Özellik Ekle</button>
 
-                                </div>
-                                <div class="modal fade" id="myModal" role="dialog" style="display:none">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header" style="background-color: #6777ef; cursor: move;">
-                                                <h5 id="modalTitle" style="color: white; margin: 0; flex: 1;"></h5>
-                                            </div>
-                                            <div class="modal-body" id="Body"></div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" onclick="closeModal()">Kapat</button>
+
+
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h6 class="mt-3 ms-3">Oda Fiyatı:</h6>
+                                                <div class="d-flex justify-content-between ms-3">
+                                                    <ul class="list-group ms-3>
+                                                        <li class="list-group-item">@firstRoom?.Price</li>
+                                                    </ul>
+                                                    <button class="btn btn-primary ms-3" onclick="openEditModal()">Düzenle</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
+                            </div>  
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row d-flex align-items-md-center">
+                                            <div class="col-md-10">
+                                                <h6 class="mt-3 ms-3">Oda Özellikleri:</h6>
+                                                <ul class="list-group ms-3" id="featureWrapper">
+                                                    @foreach (var feature in firstRoom?.RoomFeatures)
+                                                    {
+                                                        <li class="list-group-item">@feature.Features</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="d-flex justify-content-between ms-3">
+                                                    <button class="btn btn-primary ms-3" onclick="openEditModal()">Düzenle</button>
+                                                </div>
+                                            </div> 
+                                            <div class="col-md-1">
+                                                <div class="d-flex justify-content-between ms-3">
+                                                    <button class="btn btn-primary ms-3" onclick="openAddFeatureModal()">Ekle</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
 
                             <div class="form-group row align-items-center">
                                 <div class="card-header">
@@ -77,55 +93,16 @@
 
                                 <div class="container">
                                     <div class="row" id="imageContainer">
-                                        <!-- İlk 4 resim -->
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box">
-                                            <div class="image-wrapper">
-                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
-                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
-                                            </div>
+                                        <div class="col-md-12 image-box" id="imageSubContainer" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                            @foreach (var image in firstRoom?.RoomImages)
+                                            {
+                                                <div class="image-wrapper" style="flex: 1 1 20%; max-width: 20%; box-sizing: border-box;">
+                                                    <img src="data:image/jpeg;base64,@image.FileData" class="img-fluid" id="roomImage">
+                                                    <button class="btn btn-danger delete-btn" onclick="deleteImage(@image.ImageId)">Sil</button>
+                                                </div>
+                                            }
                                         </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box">
-                                            <div class="image-wrapper">
-                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
-                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box">
-                                            <div class="image-wrapper">
-                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
-                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box">
-                                            <div class="image-wrapper">
-                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
-                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box hidden">
-                                            <div class="image-wrapper">
-                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
-                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box hidden">
-                                            <div class="image-wrapper">
-                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
-                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box hidden">
-                                            <div class="image-wrapper">
-                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
-                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-lg-2 mb-4 image-box hidden">
-                                            <div class="image-wrapper">
-                                                <img src="~/images/301yeni/301-1.jpg" class="img-fluid">
-                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(this)">Sil</button>
-                                            </div>
-                                        </div>
+
                                     </div>
 
                                 </div>
@@ -134,7 +111,7 @@
 
 
                         </div>
-                       
+
                     </div>
 
                 </div>
@@ -154,13 +131,13 @@
         }
     });
     $(document).ready(function () {
-      
 
- 
+
+
         $(".delete-btn").click(function () {
             var imageBox = $(this).closest('.image-box');
             imageBox.fadeOut(300, function () {
-                imageBox.remove(); 
+                imageBox.remove();
             });
         });
     });

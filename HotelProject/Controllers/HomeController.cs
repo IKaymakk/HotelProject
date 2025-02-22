@@ -55,7 +55,8 @@ namespace HotelProject.Controllers
         }
         public IActionResult Room()
         {
-            return View();
+            var rooms = _roomService.GetCategoriesWithRooms();
+            return View(rooms);
         }
         public IActionResult RoomDetails()
         {
@@ -65,70 +66,11 @@ namespace HotelProject.Controllers
         {
             return View();
         }
-        public IActionResult Detail301()
+        public IActionResult Detail(int id)
         {
             return View();
         }
-        public IActionResult Detail302()
-        {
-            return View();
-        }
-        public IActionResult Detail303()
-        {
-            return View();
-        }
-        public IActionResult Detail304()
-        {
-            return View();
-        }
-        public IActionResult Detail305()
-        {
-            return View();
-        }
-        public IActionResult Detail306()
-        {
-            return View();
-        }
-        public IActionResult Detail307()
-        {
-            return View();
-        }
-        public IActionResult Detail308()
-        {
-            return View();
-        }
-        public IActionResult Detail309()
-        {
-            return View();
-        }
-        public IActionResult Detail310()
-        {
-            return View();
-        }
-        public IActionResult Detail311()
-        {
-            return View();
-        }
-        public IActionResult Detail312()
-        {
-            return View();
-        }
-        public IActionResult Detail314()
-        {
-            return View();
-        }
-        public IActionResult Detail317()
-        {
-            return View();
-        }
-        public IActionResult Detail318()
-        {
-            return View();
-        }
-        public IActionResult Detail313()
-        {
-            return View();
-        }
+ 
         public IActionResult ActivityDetail()
         {
             return View();

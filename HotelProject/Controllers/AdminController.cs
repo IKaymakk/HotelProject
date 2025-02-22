@@ -1,9 +1,12 @@
 ﻿using BusinessLayer.Services;
+using EntityLayer.DTO;
 using EntityLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelProject.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;
@@ -14,10 +17,7 @@ namespace HotelProject.Controllers
             _logger = logger;
             _roomService = roomService;
         }
-        public IActionResult Login()
-        {
-            return View();
-        }
+
         public IActionResult SetSocialMedia()
         {
             return View();
@@ -35,6 +35,7 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+
         public IActionResult RoomSet()
         {
             try
@@ -43,19 +44,20 @@ namespace HotelProject.Controllers
 
                 if (result != null)
                 {
-                    return View(result);
+                    return View(result); 
                 }
                 else
                 {
-                    return View();
+                    return View(new List<RoomDTO>()); 
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError("Error getting rooms: ", ex);
-                return View();
+                return View(new List<RoomDTO>());
             }
         }
+
 
         public IActionResult ResetPassword()
         {
@@ -97,12 +99,16 @@ namespace HotelProject.Controllers
         }
 
         [HttpPost]
-        public JsonResult InsertOrUpdateFeatures([FromBody] RoomFeatures model)
+        public JsonResult InsertFeatures([FromBody] RoomFeatures model)
         {
             try
             {
-                var result = _roomService.InsertOrUpdateFeatures(model);
-                return Json(new { success = true, message = "Feature inserted or updated successfully", data = result });
+                var result = _roomService.InsertFeatures(model);
+                if (result==true)
+                {
+                    return Json(new { success = true });
+                }
+                return Json(new { success = false });
             }
             catch (Exception ex)
             {
@@ -112,12 +118,77 @@ namespace HotelProject.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteFeatures(int RoomId)
+        public JsonResult DeleteFeatures(List<int> FeatureIds)
         {
             try
             {
-                var result = _roomService.DeleteFeatures(RoomId);
-                return Json(new { success = true, message = "Features deleted successfully", data = result });
+                var results = new List<bool>();
+
+                foreach (var FeatureId in FeatureIds)
+                {
+                    var result = _roomService.DeleteFeatures(FeatureId);  
+                    results.Add(result);
+                }
+
+                if (results.Count != 0 && results.All(r => r))
+                {
+                    return Json(new { success = true, message = "Features deleted successfully" });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Some features could not be deleted" });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error deleting features: ", ex);
+                return Json(new { success = false, message = "Error deleting features", error = ex.Message });
+            }
+        } 
+        [HttpPost]
+        public JsonResult UpdateFeatures(List<RoomFeatureDTO> Features)
+        {
+            try
+            {
+                var results = new List<bool>();
+
+                foreach (var Feature in Features)
+                {
+                    var result = _roomService.UpdateFeatures(Feature);  
+                    results.Add(result);
+                }
+
+                if (results.Count!=0 && results.All(r => r))
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error updating features: ", ex);
+                return Json(new { success = false, message = "Error deleting features", error = ex.Message });
+            }
+        }
+
+
+        [HttpPost]
+        public JsonResult DeleteImage(int ImageId)
+        {
+            try
+            {
+                var result = _roomService.DeleteImage(ImageId);
+                if (result=="Success")
+                {
+                    return Json(new { success = true, data = result });
+                }
+                else
+                {
+                    return Json(new { success = false,data = result });
+                }
             }
             catch (Exception ex)
             {
@@ -178,10 +249,15 @@ namespace HotelProject.Controllers
 
             }
         }
-        public ActionResult frmAddFeature()
+        public ActionResult frmEditFeature()
         {
             return View();
         }
+         public ActionResult frmAddFeature()
+        {
+            return View();
+        }
+        
         public ActionResult frmAddPicture()
         {
             return View();
@@ -207,6 +283,29 @@ namespace HotelProject.Controllers
             {
                 _logger.LogError("Error getting rooms: ", ex);
                 return View("Error", ex.Message);
+            }
+        }
+
+
+
+        [HttpGet]
+        public JsonResult GetRoomDetail(int roomId)
+        {
+            try
+            {
+                var result  =  _roomService.GetRoomDetail(roomId);
+
+                if (result != null)
+                {
+                    return Json(new { success = true, data = result });
+                }
+
+                return Json(new { success = false, message = "Room not found" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting room details: ", ex);
+                return Json(new { success = false, error = ex.Message });
             }
         }
 

@@ -27,6 +27,11 @@ $(document).ready(function () {
 });
 
 
+$(document).ajaxStart(function () {
+    $("#loadingDiv").show();
+}).ajaxStop(function () {
+    $("#loadingDiv").hide();
+});
 
 function insertRoom() {
     var roomData = {
@@ -43,6 +48,7 @@ function insertRoom() {
         success: function (response) {
             if (response.success) {
                 alert('Oda başarıyla eklendi!');
+                GetRoomDetail()
             } else {
                 alert('Oda eklenirken bir hata oluştu: ' + response.error);
             }
@@ -69,7 +75,7 @@ function updateRoom() {
         success: function (response) {
             if (response.success) {
                 alert('Oda başarıyla güncellendi!');
-
+                GetRoomDetail("General")
             } else {
                 alert('Oda güncellenirken bir hata oluştu: ' + response.error);
             }
@@ -81,21 +87,22 @@ function updateRoom() {
 }
 
 
-function insertOrUpdateFeatures() {
+function insertFeatures() {
     var featureData = {
-        RoomId: $('#roomId').val(),
-        FeatureName: $('#featureName').val(),
-        FeatureId: $('#featureId').val(),
+        RoomId: $("#roomNumber").val(),
+        Features: $('#featureName').val(),
     };
 
     $.ajax({
         type: 'POST',
-        url: '/Admin/InsertOrUpdateFeatures',
+        url: '/Admin/InsertFeatures',
         data: JSON.stringify(featureData),
         contentType: 'application/json',
         success: function (response) {
-            if (response.success) {
+            if (response.success == true) {
                 alert('Özellik başarıyla eklendi veya güncellendi!');
+                GetRoomDetail("General")
+
             } else {
                 alert('Özellik eklenirken veya güncellenirken bir hata oluştu: ' + response.error);
             }
@@ -105,22 +112,127 @@ function insertOrUpdateFeatures() {
         }
     });
 }
+function updateFeatures() {
+    var selectedFeatures = [];
+
+    $(".form-check-input:checked").each(function () {
+        var featureId = $(this).attr("id");
+        var featureValue = $(this).closest("li").find("input[type='text']").val();  
+
+        selectedFeatures.push({ FeatureId: featureId, Features: featureValue });
+    });
+    if (selectedFeatures.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Hata!',
+            text: 'Lütfen güncellemek için en az bir özellik seçin.',
+            confirmButtonText: 'Tamam'
+        });
+        return;
+    }
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/UpdateFeatures',
+        data: { Features: selectedFeatures }, 
+        success: function (response) {
+            if (response.success == true) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: 'Özellikler başarıyla güncellendi!',
+                    confirmButtonText: 'Tamam'
+                });
+                GetRoomDetail("Feature");
+                GetRoomDetail("General");
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Özellikler güncellenirken bir hata oluştu.',
+                    confirmButtonText: 'Tamam'
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            alert('Beklenmedik bir hata oluştu: ' + error);
+        }
+    });
+
+}
 
 
 function deleteFeatures() {
-    var featureId = $('#featureId').val()
+    var selectedFeatures = []; 
+
+    $(".form-check-input:checked").each(function () {
+        selectedFeatures.push($(this).attr('id'));  
+    });
+
+    if (selectedFeatures.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Hata!',
+            text: 'Lütfen silmek için en az bir özellik seçin.',
+            confirmButtonText: 'Tamam'
+        });
+        return;
+    }
+
     $.ajax({
         type: 'POST',
         url: '/Admin/DeleteFeatures',
-        data: JSON.stringify({ FeatureId: featureId }),
-        contentType: 'application/json',
+        data: { FeatureIds: selectedFeatures },  
+        traditional: true,
         success: function (response) {
-            if (response.success) {
-                alert('Özellik başarıyla silindi!');
+            if (response.success == true) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: 'Özellik başarıyla silindi!',
+                    confirmButtonText: 'Tamam'
+                });
+                GetRoomDetail("Feature");  
+                GetRoomDetail("General");
+
             } else {
-                alert('Özellik silinirken bir hata oluştu: ' + response.error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Özellik silinirken bir hata oluştu ' + response.error,
+                    confirmButtonText: 'Tamam'
+                });
             }
         },
+        error: function (xhr, status, error) {
+            alert('Beklenmedik bir hata oluştu: ' + error);
+        }
+    });
+}
+
+function deleteImage(id) {
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/DeleteImage',
+        data: { ImageId: id },
+        success: function (response) {
+            if (response.success == true) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: 'Resim başarıyla silindi!',
+                    confirmButtonText: 'Tamam'
+                });
+                GetRoomDetail("General")
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Resim silinirken bir hata oluştu: ' + response.error,
+                    confirmButtonText: 'Tamam'
+                });
+            }
+        },
+
         error: function (xhr, status, error) {
             alert('Beklenmedik bir hata oluştu: ' + error);
         }
@@ -139,10 +251,6 @@ function insertRoomImages() {
     }
 
     for (var i = 0; i < files.length; i++) {
-        //if (files[i].size > 1048576) { // 1MB = 1048576 byte
-        //    alert("Dosya boyutu 1MB'den büyük olamaz: " + files[i].name);
-        //    return;
-        //}
         formData.append("imageFiles", files[i]);
     }
 
@@ -157,6 +265,7 @@ function insertRoomImages() {
         success: function (response) {
             if (response.success) {
                 alert('Görseller başarıyla yüklendi!');
+                GetRoomDetail("General")
             } else {
                 alert('Hata oluştu: ' + response.error);
             }
@@ -169,23 +278,85 @@ function insertRoomImages() {
 
 
 
-function deleteRoomImage(imageId) {
+
+function GetRoomDetail(ForWhat) {
+    var roomId = $("#roomNumber").val()
     $.ajax({
-        type: 'POST',
-        url: '/Admin/DeleteRoomImages',
-        data: { imageId: imageId },
+        type: 'GET',
+        url: '/Admin/GetRoomDetail',
+        data: { roomId: roomId },
         success: function (response) {
-            if (response.success) {
-                alert('Görsel başarıyla silindi!');
-            } else {
-                alert('Hata: ' + response.message);
+            if (ForWhat == "General") {
+                $("#roomPrice").val(response.data.price)
+                var imageSubContainer = $("#imageSubContainer");
+                imageSubContainer.html("");
+                response.data.roomImages.forEach(function (image) {
+                    var imgElement = $('<div class="image-wrapper"></div>')
+                        .append('<img src="data:image/jpeg;base64,' + image.fileData + '" class="img-fluid" id="roomImage">')
+                        .append('<button class="btn btn-danger delete-btn" onclick="deleteImage(' + image.imageId + ')">Sil</button>');
+
+                    $('#imageSubContainer').css({
+                        'display': 'flex',
+                        'flex-wrap': 'wrap',
+                        'gap': '10px'
+                    });
+
+                    imgElement.css({
+                        'flex': '1 1 20%',
+                        'max-width': '20%',
+                        'box-sizing': 'border-box'
+                    });
+
+                    $('#imageSubContainer').append(imgElement);
+                });
+
+                var featureWrapper = $("#featureWrapper");
+                featureWrapper.html("");
+
+                response.data.roomFeatures.forEach(function (feature) {
+                    var listItem = $('<li class="list-group-item"></li>').text(feature.features);
+                    featureWrapper.append(listItem);
+                });
+
+            }
+            else if (ForWhat == "Feature")
+            {
+                var featureContainer = $("#featureContainer");
+                featureContainer.html("")
+                response.data.roomFeatures.forEach(function (feature) {
+                    var listItem = $('<li class="list-group-item d-flex align-items-center"></li>'); 
+
+                    var checkbox = $('<input type="checkbox" class="form-check-input me-2" id="'+feature.featureId+'">');
+                    var inputField = $('<input type="text" class="form-control ms-2" value="' + feature.features + '">');
+                    listItem.append(checkbox).append(inputField);
+                    featureContainer.append(listItem);
+                });
             }
         },
         error: function (xhr, status, error) {
-            alert('Bir hata oluştu: ' + error);
+            alert('Beklenmedik bir hata oluştu: ' + error);
         }
     });
 }
 
 
 
+
+function SelectAll() {
+    var checkboxes = $(".form-check-input:not(#selectAll)");
+
+    var allChecked = checkboxes.toArray().every(function (checkbox) {
+        return $(checkbox).prop('checked');
+    });
+
+    checkboxes.each(function () {
+        $(this).prop('checked', !allChecked);
+    });
+}
+function DeSelectAll() {
+    var checkboxes = $(".form-check-input:not(#selectAll)");
+
+    checkboxes.each(function () {
+        $(this).prop('checked', false);
+    });
+}

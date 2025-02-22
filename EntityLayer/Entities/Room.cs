@@ -23,5 +23,7 @@ namespace EntityLayer.Entities
         public bool isMainPage { get; set; }
 
         public List<RoomImages> RoomImages { get; set; }
+        public List<RoomFeatures> RoomFeatures { get; set; }
+        public virtual RoomCategory RoomCategories{ get; set; }
     }
 }

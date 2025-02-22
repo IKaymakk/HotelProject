@@ -13,13 +13,12 @@ namespace EntityLayer.Entities
     {
         [Key]
         public int ImageId { get; set; }
+        [ForeignKey("tbl_Rooms")]
         public int RoomId { get; set; }
         public string FileType { get; set; }
         public string FileName { get; set; }
         public byte[] FileData { get; set; }
         public bool isDeleted { get; set; }
-
-        [ForeignKey("RoomId")]
         public virtual Room Room { get; set; }
     }
 }

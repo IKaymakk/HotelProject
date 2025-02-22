@@ -1,25 +1,18 @@
-﻿using System;
+﻿using EntityLayer.Entities;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityLayer.Entities
+namespace EntityLayer.DTO
 {
-
-
-
-    [Table("tbl_RoomCategory")]
-    public class RoomCategory
+    public class RoomCategoryDTO
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-
         public List<Room> Rooms { get; set; } = new();
+
     }
+
 }
-
-

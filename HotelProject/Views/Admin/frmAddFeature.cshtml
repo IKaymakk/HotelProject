@@ -2,8 +2,20 @@
     Layout = null;
 
 }
-<div class="form-group row align-items-center col-12">
-    <label  for="site-title" class="form-control-label col-sm-4 text-md-right">Oda Özelliği</label>
-    <textarea style="margin-left:5px;" type="text" name="site_title" class="form-control col-4" id="site-title"></textarea>
-    <button style="margin-left:20px;" class="btn btn-primary col-2" id="save-btn">Ekle</button>
+<div class="container mt-5" id="featureContainer">
+    <input type="text" id="featureName">
 </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="insertFeatures()">Kaydet</button>
+    <button type="button" class="btn btn-danger" onclick="closeModal()">Kapat</button>
+</div>
+
+
+<script>
+    function SelectAll(){
+        var checkboxes = document.querySelectorAll(".form-check-input:not(#selectAll)");
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = document.getElementById("selectAll").checked;
+        });
+    }
+</script>

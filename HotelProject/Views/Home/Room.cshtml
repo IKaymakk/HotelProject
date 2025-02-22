@@ -1,4 +1,7 @@
-﻿<section class="section-sub-banner bg-9">
+﻿@using EntityLayer.DTO
+@model List<RoomCategoryDTO>
+
+<section class="section-sub-banner bg-9">
     <div class="awe-overlay"></div>
     <div class="sub-banner">
         <div class="container">
@@ -12,291 +15,31 @@
 <!-- ROOM -->
 <section class="section-room bg-white">
     <div class="container">
+        @foreach (var category in Model)
+        {
+            <div class="category-section" style="margin-bottom: 30px;">
+                <h2>@category.Name</h2>
 
-        <div class="room-wrap-6">
-
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/306-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/DeluxeRoom">DELUXE ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Deluxe odamız, konforlu yatak, şık dekor, geniş alan, özel banyo ve muhteşem manzarayla huzur sunar.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail306" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
+                <div class="row">
+                    @foreach (var room in category.Rooms)
+                    {
+                        <div class="col-md-12" style="margin-bottom:30px;">
+                            <div class="room_item-6" data-background="">
+                                <div class="text">
+                                    <h2><a href="/Home/RoomDetail?roomId=@room.Id">@room.Name</a></h2>
+                                    <span class="price">Günlük @room.Price₺ başlayan fiyatlarla.</span>
+                                    <p>@room.Description</p>
+                                    <ul>
+                                        <li>Maksimum: 2 Kişi</li>
+                                    </ul>
+                                    <a href="/Home/Detail?Id=@room.Id" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
-
             </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/311-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/CaveSuitRoom">SUİTE ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Suit odamız, lüks tasarımı, geniş oturma alanı, konforlu yatak ve özel balkonuyla keyifli bir konaklama sunar.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail311" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/306-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/DoubleArchRoom">DUBLEX ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail301" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/309-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/StandartArchRoom">STANDART ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail309" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-
-        </div>
-
+        }
     </div>
-    <br />
-
-    <div class="container">
-
-        <div class="room-wrap-6">
-
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/307-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/DeluxeRoom">DELUXE ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail307" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/312-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/CaveSuitRoom">SUİTE ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail312" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/302-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/DoubleArchRoom">DULE YATAK KEMER ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail302" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/318-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/KingSuitRoom">KİNG SUİT ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail304" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-
-        </div>
-
-    </div>
-    <br />
-
-    <div class="container">
-
-        <div class="room-wrap-6">
-
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/318-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/KingSuitRoom">KİNG SUİT ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail318" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/313-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/CaveSuitRoom">SUİTE ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail313" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/303-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/DoubleArchRoom">DUBLE YATAK KEMER ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail303" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/308-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/DeluxeRoom">DELUXE ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail308" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-
-        </div>
-
-    </div>    
-    <br />
-
-    <div class="container">
-
-        <div class="room-wrap-6">
-
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/310-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/DeluxeRoom">DELUXE ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail310" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/314-main.jpg")" >
-
-                <div class="text">
-                    <h2><a href="/Home/CaveSuitRoom">SUİTE ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail314" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            <div class="room_item-6" data-background="@Url.Content("~/images/307-main.jpg")">
-
-                <div class="text">
-                    <h2><a href="/Home/DeluxeRoom">DUBLEX ODALAR</a></h2>
-                    <span class="price">Start form <span class="amout">$120</span> per day</span>
-                    <p>Otelimiz, konforlu odalar, şık tasarım, eşsiz manzara, restoran, spa ve kusursuz hizmet anlayışıyla misafirlerini ağırlıyor.</p>
-                    <ul>
-                        <li>Maksimum:2 Kişi</li>
-                    </ul>
-                    <a href="/Home/Detail317" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
-                </div>
-
-            </div>
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            
-            <!-- END / ITEM -->
-
-        </div>
-
-    </div>
-    <br />
-    <div class="container">
-
-        <div class="room-wrap-6">
-
-            <!-- ITEM -->
-           
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-           
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-           
-            <!-- END / ITEM -->
-            <!-- ITEM -->
-            
-            <!-- END / ITEM -->
-
-        </div>
-
-    </div>
-
 </section>
+<!-- END / ROOM -->
