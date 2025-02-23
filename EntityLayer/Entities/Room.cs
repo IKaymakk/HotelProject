@@ -18,6 +18,7 @@ namespace EntityLayer.Entities
         public decimal? Price { get; set; }
         public string? Description { get; set; }
         public int CategoryId { get; set; }
+        public int? Capacity { get; set; }
         public string? ImageBase64 { get; set; }
         public bool isDeleted { get; set; }
         public bool isMainPage { get; set; }

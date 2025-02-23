@@ -4,45 +4,46 @@
     Layout = null;
 }
 @model List<RoomCategory>
-<div class="form-group row align-items-center">
-    <label for="roomName" class="col-sm-2 col-form-label">Oda Numarası:</label>
-    <div class="col-sm-10">
-        <input type="text" name="roomName" class="form-control" id="roomName">
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="roomName" class="form-label">Oda Numarası:</label>
+            <input type="text" name="roomName" class="form-control" id="roomName">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="roomPrice" class="form-label">Oda Fiyatı:</label>
+            <input type="text" name="roomPrice" class="form-control" id="roomPrice">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="capacity" class="form-label">Kapasite:</label>
+            <input type="text" name="capacity" class="form-control" id="capacity">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="category" class="form-label">Kategori:</label>
+            <select name="category" class="form-control" id="category">
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
     </div>
 </div>
 
-<div class="form-group row align-items-center">
-    <label for="description" class="col-sm-2 col-form-label">Açıklama:</label>
-    <div class="col-sm-10">
-        <input type="text" name="description" class="form-control" id="description">
-    </div>
+<div class="form-group">
+    <label for="description" class="form-label">Açıklama:</label>
+    <textarea type="text" name="description" class="form-control" id="description" rows="5"></textarea>
 </div>
 
-<div class="form-group row align-items-center">
-    <label for="capacity" class="col-sm-2 col-form-label">Kapasite:</label>
-    <div class="col-sm-10">
-        <input type="text" name="capacity" class="form-control" id="capacity">
-    </div>
-</div>
 
-<div class="form-group row align-items-center">
-    <label for="roomPrice" class="col-sm-2 col-form-label">Oda Fiyatı:</label>
-    <div class="col-sm-10">
-        <input type="text" name="roomPrice" class="form-control" id="roomPrice">
-    </div>
-</div>
-
-<div class="form-group row align-items-center">
-    <label for="category" class="col-sm-2 col-form-label">Kategori:</label>
-    <div class="col-sm-10">
-        <select name="category" class="form-control" id="category">
-            @foreach (var item in Model)
-            {
-                <option value="@item.Id">@item.Name</option>
-            }
-        </select>
-    </div>
-</div>
 
 <div class="form-group row align-items-center">
     <label for="roomPrice" class="col-sm-2 col-form-label">Popüler Oda Mı?</label>

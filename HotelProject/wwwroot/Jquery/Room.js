@@ -1,31 +1,4 @@
 ﻿
-$(document).ready(function () {
-    // FilePond ile dosya yüklemeyi başlat
-    const inputElement = document.querySelector('#imageFiles');
-    const pond = FilePond.create(inputElement, {
-        allowMultiple: true,  // Birden fazla dosya seçmeye izin ver
-        imagePreviewHeight: 100, // Önizleme resminin yüksekliği
-        imageCropAspectRatio: '1:1', // Resmin oranını 1:1 yaparak kare göster
-        imageResizeTargetWidth: 100, // Resmin önizleme genişliği
-        imageResizeTargetHeight: 100, // Resmin önizleme yüksekliği
-    });
-
-    // Dosya seçildikçe önizlemeleri gösterir
-    inputElement.addEventListener('change', function (event) {
-        var files = event.target.files;
-        var previewContainer = $("#previewContainer");
-        previewContainer.empty(); // Önizleme alanını temizle
-
-        // Dosya seçildikçe, her birini FilePond'a yükle
-        for (var i = 0; i < files.length; i++) {
-            // FilePond ile resim önizlemesi
-            pond.addFile(files[i]).then(function (file) {
-                // FilePond kendiliğinden önizlemeyi oluşturacak
-            });
-        }
-    });
-});
-
 
 $(document).ajaxStart(function () {
     $("#loadingDiv").show();
@@ -36,8 +9,11 @@ $(document).ajaxStart(function () {
 function insertRoom() {
     var roomData = {
         Name: $('#roomName').val(),
-        Price: parseInt($('#roomPrice').val(), 10),
+        Price: parseFloat($('#roomPrice').val(), 10),
         CategoryId: parseInt($('#category').val(), 10),
+        Description: $('#description').val(),
+        Capacity: parseInt($('#capacity').val(), 10),
+        isMainPage: $('#isMainPage').val() == 1 ? true : false
     };
 
     $.ajax({
@@ -159,8 +135,6 @@ function updateFeatures() {
     });
 
 }
-
-
 function deleteFeatures() {
     var selectedFeatures = []; 
 
@@ -287,7 +261,7 @@ function GetRoomDetail(ForWhat) {
         data: { roomId: roomId },
         success: function (response) {
             if (ForWhat == "General") {
-                $("#roomPrice").val(response.data.price)
+                $("#roomPrice").text(response.data.price)
                 var imageSubContainer = $("#imageSubContainer");
                 imageSubContainer.html("");
                 response.data.roomImages.forEach(function (image) {
