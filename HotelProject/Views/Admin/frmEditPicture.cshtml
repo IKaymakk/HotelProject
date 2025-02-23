@@ -2,57 +2,81 @@
 @{
     Layout = null;
 }
-<style>
-    .image-container {
-        position: relative;
-        display: inline-block;
-    }
 
-    .checkbox-overlay {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        display: none;
-        background: rgba(0, 0, 0, 0.5);
-        padding: 5px;
-        border-radius: 5px;
-    }
+    <style>
+        .image-container {
+            position: relative;
+            margin: 0 10px;
+        }
 
-    .image-container:hover .checkbox-overlay {
-        display: block;
-    }
+        .checkbox-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+        }
 
-    .image-container img {
-        width: 200px;
-        height: 150px;
-        display: block;
-        border-radius: 5px;
-    }
-</style>
+        .image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        .gap-3 > * {
+            margin: 0 10px;
+        }
+
+        .modal-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 
 <div class="d-flex justify-content-center gap-3">
     <!-- 1. Resim -->
     <div class="image-container">
         <div class="checkbox-overlay">
-            <input type="checkbox">
+            <input type="checkbox" class="image-checkbox">
         </div>
-        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.minikseyler.com%2Fjellycat-bartholomew-ayicik-orta-boy&psig=AOvVaw1MeRFOUhppLqiZjXYzuZvn&ust=1740409739394000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCICfwdSJ2osDFQAAAAAdAAAAABAK" >
+        <img src="https://iasbh.tmgrup.com.tr/13869e/650/344/0/0/789/415?u=https://isbh.tmgrup.com.tr/sbh/2024/10/16/ayi-ne-ile-beslenir-ayilar-ne-yer-neyle-beslenir-e1-1729061535612.jpg">
     </div>
-
     <!-- 2. Resim -->
     <div class="image-container">
         <div class="checkbox-overlay">
-            <input type="checkbox">
+            <input type="checkbox" class="image-checkbox">
         </div>
-        <img src="https://via.placeholder.com/200x150" >
+        <img src="https://iasbh.tmgrup.com.tr/13869e/650/344/0/0/789/415?u=https://isbh.tmgrup.com.tr/sbh/2024/10/16/ayi-ne-ile-beslenir-ayilar-ne-yer-neyle-beslenir-e1-1729061535612.jpg">
+    </div>
+    <!-- 3. Resim -->
+    <div class="image-container">
+        <div class="checkbox-overlay">
+            <input type="checkbox" class="image-checkbox">
+        </div>
+        <img src="https://iasbh.tmgrup.com.tr/13869e/650/344/0/0/789/415?u=https://isbh.tmgrup.com.tr/sbh/2024/10/16/ayi-ne-ile-beslenir-ayilar-ne-yer-neyle-beslenir-e1-1729061535612.jpg">
+    </div>
+    <!-- 4. Resim -->
+    <div class="image-container">
+        <div class="checkbox-overlay">
+            <input type="checkbox" class="image-checkbox">
+        </div>
+        <img src="https://iasbh.tmgrup.com.tr/13869e/650/344/0/0/789/415?u=https://isbh.tmgrup.com.tr/sbh/2024/10/16/ayi-ne-ile-beslenir-ayilar-ne-yer-neyle-beslenir-e1-1729061535612.jpg">
     </div>
 </div>
 
-
 <div class="modal-footer">
-    <button id="deselectButton" class="btn btn-secondary" onclick="DeSelectAll()">Seçimleri Temizle</button>
-    <button id="selectAllButton" class="btn btn-primary" onclick="SelectAll()">Tümünü Seç</button>
+    <button id="deselectButton" class="btn btn-secondary">Seçimleri Temizle</button>
+    <button id="selectAllButton" class="btn btn-primary">Tümünü Seç</button>
     <button type="button" class="btn btn-danger" onclick="deleteFeatures()">Sil</button>
-    <button type="button" class="btn btn-primary" onclick="updateFeatures()">Güncelle</button>
+    <button type="button" class="btn btn-primary" onclick="updateFeatures()">Kapak Fotoğrafı Yap</button>
     <button type="button" class="btn btn-danger" onclick="closeModal()">Kapat</button>
 </div>
+
+
