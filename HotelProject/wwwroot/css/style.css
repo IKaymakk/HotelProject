@@ -11490,6 +11490,22 @@ blockquote {
 
 
 
+.room_img-item img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    display: block; 
+}
+
+.room_img-item {
+    width: 100%; 
+    height: 300px; 
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
 
 
 

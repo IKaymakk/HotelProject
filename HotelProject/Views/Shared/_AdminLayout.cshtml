@@ -18,6 +18,10 @@
     <link rel="stylesheet" type="text/css" href="~/admin/css/duotone-dark.css">
     <link rel="stylesheet" type="text/css" href="~/admin/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="~/admin/css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <!-- FilePond CSS -->
     <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet">
 
@@ -50,8 +54,6 @@
                     <nav class="navbar navbar-expand-lg main-navbar">
                         <form class="form-inline mr-auto">
                             <ul class="navbar-nav mr-3">
-                                <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-                                <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
                             </ul>
                             <div class="search-element">
                                
@@ -129,8 +131,8 @@
                                 <li class="dropdown">
                                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Rezervasyonlar</span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="nav-link" href="index-0.html">Yaklaşan Rezervasyonlar</a></li>
-                                        <li><a class="nav-link" href="index.html">Geçmiş Rezervasyonlar</a></li>
+                                        <li><a class="nav-link" href="/Admin/PastRez">Yaklaşan Rezervasyonlar</a></li>
+                                        <li><a class="nav-link" href="/Admin/UpcomingRez">Geçmiş Rezervasyonlar</a></li>
                                     </ul>
                                 </li>
                                
@@ -140,20 +142,19 @@
                                 <li class="menu-header">Ayarlar</li>
 
                                 <li class="dropdown">
-                                    <a href="/Admin/ResetPassword" class="nav-link "><i class="fa-solid fa-gears"></i> <span>Şifre Değiştir</span></a>
-                                    <a href="/Admin/SetAboutUs" class="nav-link "><i class="fa-solid fa-gears"></i> <span>Hakkımızda Düzenle</span></a>
-                                    <a href="/Admin/SetContact" class="nav-link "><i class="fa-solid fa-gears"></i> <span>İletişim Düzenle</span></a>
-                                    <a href="/Admin/SetPopularRoom" class="nav-link "><i class="fa-solid fa-gears"></i> <span>Popüler Odaları Düzenle</span></a>
-                                    <a href="/Admin/SetSocialMedia" class="nav-link "><i class="fa-solid fa-gears"></i> <span>Sosyal Medya Ayarları</span></a>
-
+                                    <a href="/Admin/ResetPassword" class="nav-link "><i class="fa-solid fa-gears"></i> <span>Tüm Ayarlar</span></a>
+                                    
                                 </li>
 
 
                                 <li>
-                                    <a class="nav-link text-white bg-danger px-3 py-2 rounded" href="javascript:void(0);" onclick="Logout()">
+                                    <a class="text-white bg-danger small-btn" href="javascript:void(0);" onclick="Logout()">
                                         <i class="fa-solid fa-right-from-bracket"></i> <span>Çıkış Yap</span>
                                     </a>
                                 </li>
+
+
+
 
                         </aside>
                     </div>
@@ -194,9 +195,11 @@
     <script type="text/javascript" src="~/Jquery/Login.js"></script>
     <script type="text/javascript" src="~/admin/js/scripts.js"></script>
     <script type="text/javascript" src="~/Jquery/Room.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 
 
 

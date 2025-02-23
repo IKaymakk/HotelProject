@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+<div class="main-content">
+    <section class="section">
+
+
+        <div class="section-body">
+            <table id="example-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>İsim</th>
+                        <th>Email</th>
+                        <th>Telefon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Veriler buraya eklenecek -->
+                </tbody>
+            </table>
+
+
+            
+        </div>
+    </section>
+</div>
+
+
+<script>
+    // Örnek veri seti
+    const data = [
+        { id: 1, name: "Ahmet Yılmaz", email: "ahmet@example.com", phone: "555-123-4567" },
+        { id: 2, name: "Mehmet Kaya", email: "mehmet@example.com", phone: "555-987-6543" },
+        { id: 3, name: "Zeynep Çelik", email: "zeynep@example.com", phone: "555-456-7890" },
+    ];
+
+    // Table.js kullanarak tablo oluşturma
+    const table = document.querySelector("#example-table tbody");
+
+    // Verileri tabloya ekleme
+    data.forEach(row => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+            <td>${row.id}</td>
+            <td>${row.name}</td>
+            <td>${row.email}</td>
+            <td>${row.phone}</td>
+        `;
+
+        table.appendChild(tr);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

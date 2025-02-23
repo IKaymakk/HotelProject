@@ -22,6 +22,10 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+        public IActionResult frmEditPicture()
+        {
+            return View();
+        }
 
         public IActionResult SetPopularRoom()
         {
@@ -249,11 +253,24 @@ namespace HotelProject.Controllers
 
             }
         }
+
         public ActionResult frmEditFeature()
         {
             return View();
         }
-         public ActionResult frmAddFeature()
+        public ActionResult frmEditPrice()
+        {
+            return View();
+        }
+        public ActionResult UpcomingRez()
+        {
+            return View();
+        }
+        public ActionResult PastRez()
+        {
+            return View();
+        }
+        public ActionResult frmAddFeature()
         {
             return View();
         }

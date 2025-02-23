@@ -4,37 +4,66 @@
     Layout = null;
 }
 @model List<RoomCategory>
-<div class="form-group row align-items-center col-10">
-    <label for="roomName" class="form-control-label col-sm-3 text-md-right">Oda Numarası:</label>
-    <div class="col-sm-3">
+<div class="form-group row align-items-center">
+    <label for="roomName" class="col-sm-2 col-form-label">Oda Numarası:</label>
+    <div class="col-sm-10">
         <input type="text" name="roomName" class="form-control" id="roomName">
     </div>
 </div>
 
-<div class="form-group row align-items-center col-10">
-    <label for="roomPrice" class="form-control-label col-sm-3 text-md-right">Oda Fiyatı:</label>
-    <div class="col-sm-3">
+<div class="form-group row align-items-center">
+    <label for="description" class="col-sm-2 col-form-label">Açıklama:</label>
+    <div class="col-sm-10">
+        <input type="text" name="description" class="form-control" id="description">
+    </div>
+</div>
+
+<div class="form-group row align-items-center">
+    <label for="capacity" class="col-sm-2 col-form-label">Kapasite:</label>
+    <div class="col-sm-10">
+        <input type="text" name="capacity" class="form-control" id="capacity">
+    </div>
+</div>
+
+<div class="form-group row align-items-center">
+    <label for="roomPrice" class="col-sm-2 col-form-label">Oda Fiyatı:</label>
+    <div class="col-sm-10">
         <input type="text" name="roomPrice" class="form-control" id="roomPrice">
     </div>
 </div>
 
-<div class="form-group row align-items-center col-10">
-    <label for="category" class="form-control-label col-sm-3 text-md-right">Kategori:</label>
-    <div class="col-sm-3">
+<div class="form-group row align-items-center">
+    <label for="category" class="col-sm-2 col-form-label">Kategori:</label>
+    <div class="col-sm-10">
         <select name="category" class="form-control" id="category">
             @foreach (var item in Model)
             {
-                <option value="@item.Id">@item.Name</option>  
+                <option value="@item.Id">@item.Name</option>
             }
         </select>
     </div>
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-6 offset-sm-3">
-        <button class="btn btn-primary" onclick="insertRoom()" id="save-btn">Ekle</button>
+<div class="form-group row align-items-center">
+    <label for="roomPrice" class="col-sm-2 col-form-label">Popüler Oda Mı?</label>
+    <div class="col-sm-10">
+        <input type="checkbox" name="roomPrice" class="form-control col-10" id="roomPrice" style="
+    width: auto;
+">
     </div>
 </div>
+
+
+
 <div class="modal-footer">
+    <div class="col-sm-6 offset-sm-3">
+        <button style="    position: absolute;
+    margin-left: 282px;
+    margin-block: -16px;" class="btn btn-primary" onclick="insertRoom()" id="save-btn">
+            Ekle
+        </button>
+    </div>
     <button type="button" class="btn btn-danger" onclick="closeModal()">Kapat</button>
 </div>
+
+

@@ -8,117 +8,169 @@
 
 
 <div class="main-content">
-    <section class="section">
-        <div class="section-body">
-            <div id="output-status"></div>
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="card" id="settings-card">
-
-                        <div class="card-body">
 
 
-                            <div class="form-group row align-items-center">
 
-                                <div class="card-header ">
-                                    <h4 style="padding-left:30px;">Oda Seç:</h4>
-                                    <div class="col-sm-6 col-md-2">
-                                        <select style="margin-left:23px;" name="site_title" class="form-control" id="roomNumber" onchange="GetRoomDetail('General')">
-                                            @foreach (var room in Model)
-                                            {
-                                                <option value="@room.Id">@room.Name</option>
-                                            }
-                                        </select>
+    <div class="section-body">
+        <div class="row justify-content-center">
+            <div class="">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ayarlar</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item col-4">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#oda" role="tab" aria-controls="home" aria-selected="true">Oda Seç</a>
+                            </li>
+                            <li class="nav-item col-4">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#odafiyatı" role="tab" aria-controls="profile" aria-selected="false">Oda Fiyatı</a>
+                            </li>
+                            <li class="nav-item col-4">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#odaözellik" role="tab" aria-controls="contact" aria-selected="false">Oda Özellikleri</a>
+                            </li>
+                            <li class="nav-item col-4">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#odaresim" role="tab" aria-controls="contact" aria-selected="false">Oda Resimleri</a>
+                            </li>
+                            <li class="nav-item col-4">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#odapop" role="tab" aria-controls="contact" aria-selected="false">Oda Popüler Mi?</a>
+                            </li>
+
+
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="oda" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="form-group row align-items-center">
+
+                                    <div class="card-header ">
+                                        <h4 style="padding-left:30px;">Oda Seç:</h4>
+                                        <div class="col-sm-6 col-md-2">
+                                            <select style="margin-left:23px; border-radius: 0;" name="site_title" class="form-control" id="roomNumber" onchange="GetRoomDetail('General')">
+                                                @foreach (var room in Model)
+                                                {
+                                                    <option value="@room.Id">@room.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <button onclick="openRoomModal()" style="margin-left:750px; border-radius:0px;" class="btn btn-primary" id="save-btn">Oda Ekle</button>
+
                                     </div>
-                                    <button onclick="openRoomModal()" style="margin-left:750px;" class="btn btn-primary" id="save-btn">Oda Ekle</button>
 
                                 </div>
-
                             </div>
 
+                            <div class="tab-pane fade" id="odafiyatı" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="col-md-12">
 
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h6 class="mt-3 ms-3">Oda Fiyatı:</h6>
+                                                    <div class="d-flex justify-content-between ms-3">
 
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <h6 class="mt-3 ms-3">Oda Fiyatı:</h6>
-                                                <div class="d-flex justify-content-between ms-3">
-                                                    <ul class="list-group ms-3>
-                                                        <li class="list-group-item">@firstRoom?.Price</li>
+                                                        <button class="btn btn-primary ms-3" onclick="openEditPriceModal()">Düzenle</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="odaözellik" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="col-md-12">
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-10">
+                                                    <h6 class="mt-3">Oda Özellikleri:</h6>
+                                                    <ul class="list-group" id="featureWrapper">
+                                                        @foreach (var feature in firstRoom?.RoomFeatures)
+                                                        {
+                                                            <li class="list-group-item">@feature.Features</li>
+                                                        }
                                                     </ul>
-                                                    <button class="btn btn-primary ms-3" onclick="openEditModal()">Düzenle</button>
+                                                </div>
+                                                <div style="margin-top:24px;" class="col-md-2">
+                                                    <div class="d-flex flex-column gap-2 mt-3">
+                                                        <button class="btn btn-primary btn-sm mb-2" onclick="openEditModal()">Düzenle</button>
+                                                        <button class="btn btn-primary btn-sm" onclick="openAddFeatureModal()">Ekle</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
-                            </div>  
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row d-flex align-items-md-center">
-                                            <div class="col-md-10">
-                                                <h6 class="mt-3 ms-3">Oda Özellikleri:</h6>
-                                                <ul class="list-group ms-3" id="featureWrapper">
-                                                    @foreach (var feature in firstRoom?.RoomFeatures)
+                            </div>
+
+                            <div class="tab-pane fade" id="odaresim" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="col-md-12">
+
+                                    <div class="form-group row align-items-center">
+                                        <div class="card-header">
+                                            <h4 style="margin-left:40px;">Oda Resimleri:</h4>
+
+                                            <div class="buttons">
+
+                                                <button class="btn btn-primary" onclick="openPictureModal()" style="margin-left:12px; border-radius:0px;">Resim Ekle</button>
+                                                <button class="btn btn-primary" onclick="openEditPicModal()" style="margin-left:12px; border-radius:0px;">Düzenle</button>
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="container">
+                                            <div class="row" id="imageContainer">
+                                                <div class="col-md-12 image-box" id="imageSubContainer" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                                    @foreach (var image in firstRoom?.RoomImages)
                                                     {
-                                                        <li class="list-group-item">@feature.Features</li>
+                                                        <div class="image-wrapper" style="flex: 1 1 18%; max-width: 18%; box-sizing: border-box;">
+                                                            <img src="data:image/jpeg;base64,@image.FileData" class="img-fluid" id="roomImage">
+                                                            <button class="btn btn-danger delete-btn" onclick="deleteImage(@image.ImageId)">Sil</button>
+                                                        </div>
                                                     }
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <div class="d-flex justify-content-between ms-3">
-                                                    <button class="btn btn-primary ms-3" onclick="openEditModal()">Düzenle</button>
                                                 </div>
-                                            </div> 
-                                            <div class="col-md-1">
-                                                <div class="d-flex justify-content-between ms-3">
-                                                    <button class="btn btn-primary ms-3" onclick="openAddFeatureModal()">Ekle</button>
-                                                </div>
+
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade show active" id="odapop" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="form-group row align-items-center">
 
-
-                            <div class="form-group row align-items-center">
-                                <div class="card-header">
-                                    <h4 style="margin-left:40px;">Oda Resimleri:</h4>
-                                    <button class="btn btn-primary" onclick="openPictureModal()" style="margin-left:12px;">Resim Ekle</button>
-                                </div>
-
-                                <div class="container">
-                                    <div class="row" id="imageContainer">
-                                        <div class="col-md-12 image-box" id="imageSubContainer" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                            @foreach (var image in firstRoom?.RoomImages)
-                                            {
-                                                <div class="image-wrapper" style="flex: 1 1 18%; max-width: 18%; box-sizing: border-box;">
-                                                    <img src="data:image/jpeg;base64,@image.FileData" class="img-fluid" id="roomImage">
-                                                    <button class="btn btn-danger delete-btn" onclick="deleteImage(@image.ImageId)">Sil</button>
-                                                </div>
-                                            }
+                                    <div class="card-header">
+                                        <h4 style="padding-left:30px;">Durum Seç:</h4>
+                                        <div class="col-sm-6 col-md-2">
+                                            <select style="margin-left:23px; border-radius: 0;" name="site_title" class="form-control">
+                                                <option value="evet">Evet</option>
+                                                <option value="hayir">Hayır</option>
+                                            </select>
                                         </div>
-
+                                        <button style="margin-left:750px; border-radius:0px;" class="btn btn-primary">Kaydet</button>
                                     </div>
+
 
                                 </div>
                             </div>
-
-
 
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+
+
 </div>
+
 <script>
     document.getElementById("site-logo").addEventListener("change", function () {
         var fileLabel = document.getElementById("file-label");

@@ -81,6 +81,21 @@ a {
 .bg-primary {
     background-color: #6777ef !important;
 }
+.small-btn {
+    padding: 11px 13px !important; /* Ne çok küçük ne çok büyük */
+    font-size: 13px !important; /* Yazıyı biraz küçülttük ama okunaklı */
+    line-height: 1 !important; /* Fazla yükseklik kaplamasını engelledik */
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px !important; /* Hafif köşeli */
+    width: auto !important; /* İçeriğe göre genişlik ayarla */
+    height: auto !important; /* İçeriğe göre yükseklik ayarla */
+}
+
+
+
+
 
 .bg-secondary {
     background-color: #cdd3d8 !important;
@@ -1328,6 +1343,13 @@ table tr:hover .table-links {
 .tooltip-inner {
     padding: 7px 13px;
 }
+.tab-content.no-padding > .tab-pane {
+    padding: 0;
+}
+
+.tab-content > .tab-pane {
+    line-height: 28px;
+}
 
 /* 3.8 Modal */
 .modal-header,
@@ -1605,7 +1627,7 @@ h6 .badge {
     font-size: 12px;
     line-height: 24px;
     padding: .3rem .8rem;
-    letter-spacing: .5px;
+    
 }
 
     .btn.btn-icon-split {
@@ -2665,13 +2687,13 @@ a.dropdown-item {
         }
 }
 /* 3.20 Dropdown */
-.tab-content.no-padding > .tab-pane {
+/*.tab-content.no-padding > .tab-pane {
     padding: 0;
 }
 
 .tab-content > .tab-pane {
     line-height: 28px;
-}
+}*/
 
 /* 3.21 Progress Bar */
 .progress-bar {
@@ -2969,6 +2991,7 @@ pre {
     height: 100%;
     min-height: 400px;
 }
+
 
 #visitorMap2,
 #visitorMap3 {
@@ -3949,7 +3972,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Arka planı hafif karartma efekti */
+    background-color: rgba(0, 0, 0, 0.5);
     overflow: auto;
 }
 
