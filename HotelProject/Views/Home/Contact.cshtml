@@ -10,8 +10,7 @@
     </div>
 
 </section>
-<!-- END / SUB BANNER -->
-<!-- CONTACT -->
+
 <section class="section-contact">
     <div class="container">
         <div class="contact">
@@ -73,22 +72,28 @@
 
                 <div class="col-md-6 col-lg-6 col-lg-offset-1">
                     <div class="contact-form">
-                        <form id="send-contact-form" action="send_mail_contact.php" method="post">
+                        <form id="SendMail" >
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <input type="text" class="field-text" name="name" placeholder="İsim">
+                                    <input type="text" class="field-text" name="Name" placeholder="Ad">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" class="field-text" name="email" placeholder="Email">
+                                    <input type="text" class="field-text" name="Lastname" placeholder="Soyad">
+                                </div> 
+                                <div class="col-sm-6">
+                                    <input type="text" class="field-text" name="Email" placeholder="Email">
+                                </div> 
+                                <div class="col-sm-6">
+                                    <input type="text" class="field-text" name="Phone" placeholder="Telefon Numarası">
                                 </div>
                                 <div class="col-sm-12">
-                                    <input type="text" class="field-text" name="subject" placeholder="Konu">
+                                    <input type="text" class="field-text" name="Subject" placeholder="Konu">
                                 </div>
                                 <div class="col-sm-12">
-                                    <textarea cols="30" rows="10" name="message" class="field-textarea" placeholder="Mesajınızı Giriniz"></textarea>
+                                    <textarea cols="30" rows="10" name="Body" class="field-textarea" placeholder="Mesajınızı Giriniz"></textarea>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="submit" class="awe-btn awe-btn-13">Gönder</button>
+                                    <button type="button" class="awe-btn awe-btn-13" onclick="SendMail()">Gönder</button>
                                 </div>
                             </div>
                             <div id="contact-content"></div>

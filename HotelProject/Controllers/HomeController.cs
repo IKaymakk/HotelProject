@@ -1,8 +1,11 @@
 using BusinessLayer.Services;
+using EntityLayer.DTO;
 using EntityLayer.Entities;
 using HotelProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Net;
 
 namespace HotelProject.Controllers
 {
@@ -11,15 +14,17 @@ namespace HotelProject.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly HomeService _homeService;
         private readonly RoomService _roomService;
+        private readonly EmailService _mailService;
 
-        public HomeController(ILogger<HomeController> logger, HomeService homeService, RoomService roomService)
+        public HomeController(ILogger<HomeController> logger, HomeService homeService, RoomService roomService, EmailService mailService)
         {
             _logger = logger;
             _homeService = homeService;
             _roomService = roomService;
+            _mailService = mailService;
         }
 
- 
+
         public IActionResult Index()
         {
             try
@@ -46,7 +51,7 @@ namespace HotelProject.Controllers
                 return View();
             }
 
-            
+
         }
 
         public IActionResult About()
@@ -68,9 +73,14 @@ namespace HotelProject.Controllers
         }
         public IActionResult Detail(int id)
         {
+            RoomDTO room = _roomService.GetRoomDetail(id);
+            return View(room);
+        }
+        public IActionResult Detail301()
+        {
             return View();
         }
- 
+
         public IActionResult ActivityDetail()
         {
             return View();
@@ -104,6 +114,14 @@ namespace HotelProject.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<JsonResult> SendMail(MailModel model)
+        {
+            var result = await _mailService.SendMailAsync(model);
+            return Json(new { success = result });
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

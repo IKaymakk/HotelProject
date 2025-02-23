@@ -1,4 +1,4 @@
-﻿using BusinessLayer.Mapper;
+﻿
 using BusinessLayer.Profiles;
 using BusinessLayer.Services;
 using DataAccessLayer;
@@ -41,11 +41,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(RoomProfile));
-builder.Services.AddAutoMapper(typeof(RoomCategoryProfile));
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<RoomService>();
 builder.Services.AddScoped<HomeService>();
 builder.Services.AddScoped<LoginService>();
+builder.Services.AddScoped<EmailService>();
 
 var app = builder.Build();
 

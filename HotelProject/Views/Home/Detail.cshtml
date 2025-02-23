@@ -1,4 +1,7 @@
-﻿<section class="section-sub-banner bg-9">
+﻿@using EntityLayer.DTO
+@model RoomDTO
+
+<section class="section-sub-banner bg-9">
     <div class="awe-overlay"></div>
     <div class="sub-banner">
         <div class="container">
@@ -19,22 +22,13 @@
                 <div class="col-lg-9">
 
                     <div class="room-detail_img">
+                        @foreach (var image in Model.RoomImages)
+                        {
+                            <div class="room_img-item">
+                                <img src="data:image/jpeg;base64,@image.FileData" alt="">
+                            </div>
+                        }
 
-                        <div class="room_img-item">
-                            <img src="~/images/yeni301/301-1.jpg" alt="">
-                        </div>
-                        <div class="room_img-item">
-                            <img src="~/images/yeni301/301-2.jpg" alt="">
-                        </div>
-                        <div class="room_img-item">
-                            <img src="~/images/yeni301/301-3.jpg" alt="">
-                        </div>
-                        <div class="room_img-item">
-                            <img src="~/images/yeni301/301-4.jpg" alt="">
-                        </div>
-                        <div class="room_img-item">
-                            <img src="~/images/yeni301/301-5.jpg" alt="">
-                        </div>
                     </div>
 
                 </div>
@@ -57,8 +51,8 @@
                             <input type="text" class="awe-calendar from" placeholder="Giriş Tarihi">
                             <label>Çıkış</label>
                             <input type="text" class="awe-calendar to" placeholder="Çıkış Tarihi">
-                          
-                            
+
+
                             <button class="awe-btn awe-btn-13">Rezervasyon Yap</button>
                         </div>
 
@@ -92,7 +86,7 @@
                                     </div>
                                     <div class="col-xs-6 col-md-4">
                                         <h6>SERVICE ROOM</h6>
-                                        
+
                                     </div>
                                 </div>
 
@@ -106,22 +100,15 @@
 
                                 <div class="row">
                                     <div class="col-xs-6 col-lg-4">
-                                        <h6>LIVING ROOM</h6>
                                         <ul>
-                                            <li>Televizyon</li>
-                                            <li>Saç kurutma makinesi</li>
-                                            <li>Oda İkramları</li>
+                                            @foreach (var feature in Model.RoomFeatures)
+                                            {
+                                                <li>@feature.Features</li>
+                                            }
                                         </ul>
                                     </div>
-                                   
-                                   
-                                    
-                                   
-                                    
                                 </div>
-
                             </div>
-
                         </div>
 
                         <div class="tab-pane fade" id="package">
@@ -150,7 +137,7 @@
 
                                         <div class="room-package_price">
                                             <p class="price">
-                                                <span class="amout"></span> 
+                                                <span class="amout"></span>
                                             </p>
                                             <a href="#" class="awe-btn awe-btn-default">Book package</a>
                                         </div>
@@ -165,7 +152,7 @@
 
                                         <div class="room-package_price">
                                             <p class="price">
-                                                <span class="amout"></span> 
+                                                <span class="amout"></span>
                                             </p>
                                             <a href="#" class="awe-btn awe-btn-default">Book package</a>
                                         </div>
@@ -175,7 +162,7 @@
                             </div>
 
                         </div>
-            
+
                         <div class="tab-pane fade" id="rates">
 
                             <div class="room-detail_rates">

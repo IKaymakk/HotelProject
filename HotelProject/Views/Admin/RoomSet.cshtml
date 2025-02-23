@@ -96,7 +96,7 @@
                                         <div class="col-md-12 image-box" id="imageSubContainer" style="display: flex; flex-wrap: wrap; gap: 10px;">
                                             @foreach (var image in firstRoom?.RoomImages)
                                             {
-                                                <div class="image-wrapper" style="flex: 1 1 20%; max-width: 20%; box-sizing: border-box;">
+                                                <div class="image-wrapper" style="flex: 1 1 18%; max-width: 18%; box-sizing: border-box;">
                                                     <img src="data:image/jpeg;base64,@image.FileData" class="img-fluid" id="roomImage">
                                                     <button class="btn btn-danger delete-btn" onclick="deleteImage(@image.ImageId)">Sil</button>
                                                 </div>

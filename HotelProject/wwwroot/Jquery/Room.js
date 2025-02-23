@@ -302,8 +302,8 @@ function GetRoomDetail(ForWhat) {
                     });
 
                     imgElement.css({
-                        'flex': '1 1 20%',
-                        'max-width': '20%',
+                        'flex': '1 1 18%',
+                        'max-width': '18%',
                         'box-sizing': 'border-box'
                     });
 
