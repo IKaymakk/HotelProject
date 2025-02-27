@@ -98,9 +98,9 @@
                                                     <div class="row mt-3" id="imageContainer">
                                                         @foreach (var image in firstRoom?.RoomImages)
                                                         {
-                                                            <div class="col-md-3 image-box text-center">
+                                                            <div class="image-wrapper" style="flex: 1 1 18%; max-width: 18%; box-sizing: border-box;">
                                                                 <img src="data:image/jpeg;base64,@image.FileData" class="img-fluid" id="roomImage">
-                                                                <button class="btn btn-danger delete-btn mt-2" onclick="deleteImage(@image.ImageId)">Sil</button>
+                                                                <button class="btn btn-danger delete-btn" onclick="deleteImage(@image.ImageId)">Sil</button>
                                                             </div>
                                                         }
                                                     </div>
