@@ -1,11 +1,8 @@
 using BusinessLayer.Services;
 using EntityLayer.DTO;
-using EntityLayer.Entities;
 using HotelProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Net.Mail;
-using System.Net;
 
 namespace HotelProject.Controllers
 {
@@ -15,17 +12,13 @@ namespace HotelProject.Controllers
         {
             try
             {
-
                 return View();
             }
-
             catch (Exception ex)
             {
                 logger.LogError("Error getting rooms: ", ex);
                 return View();
             }
-
-
         }
 
         public IActionResult About()

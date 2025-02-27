@@ -11,9 +11,6 @@ public class BaseController(RoomService roomService, HomeService homeService) : 
         var result2 = roomService.GetRoomCategories();
         var result3 = homeService.GetContactInformations();
         ViewBag.ContactInfo = result3;
-        if (result2 != null)
-        {
-            ViewBag.Categories = result2;
-        }
+        ViewBag.Categories = result2;
     }
 }

@@ -1,7 +1,7 @@
 ﻿@using EntityLayer.Entities
 
 @{
-    var Categories = ViewBag.Categories as List<RoomCategory>;
+    var categories = ViewBag.Categories as List<RoomCategory>;
     var contactInfo = ViewBag.ContactInfo as ContactInformations;
 }
 
@@ -80,37 +80,6 @@
                             <li><a href="/Login/Index">Login</a></li>
                             <li><a href="/Login/Register">Register</a></li>
 
-                            @* <li>
-                                <a href="/Home/Activity">Aktiviteler <span class="fa fa-caret-down"></span></a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="#">Guest Book <span ></span></a>
-
-                                    </li>
-
-                                    <li>
-                                        <a href="#">Event <span ></span></a>
-
-                                    </li>
-                                    <li>
-                                        <a href="attractions.html">Attractions</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Term Condition <span ></span></a>
-
-                                    </li>
-                                    <li>
-                                        <a href="/Home/Activitys">Activiti <span ></span></a>
-
-                                    </li>
-                                    <li><a href="check-out.html">Check Out</a></li>
-                                    <li><a href="shortcode.html">ShortCode</a></li>
-                                    <li><a href="page-404.html">404 Page</a></li>
-                                    <li><a href="comingsoon.html">Comming Soon</a></li>
-                                </ul>
-                            </li> *@
-
-
                             <li><a href="/Home/Contact">İletişim</a></li>
                         </ul>
                     </nav>
@@ -169,9 +138,9 @@
                                         <a href="#"><img src="~/images/gallery/logoarien.jpg" alt=""></a>
                                     </div>
                                     <div class="text">
-                                        <p><i class="lotus-icon-location"></i> @contactInfo.Address</p>
-                                        <p><i class="fa fa-envelope-o"></i> <a href="mailto:@contactInfo.Email">@contactInfo.Email</a></p>
-                                        <p><i class="fa fa-phone"></i> <a href="tel:@contactInfo.Phone">@contactInfo.Phone</a></p>
+                                        <p><i class="lotus-icon-location"></i> @contactInfo?.Address</p>
+                                        <p><i class="fa fa-envelope-o"></i> <a href="mailto:@contactInfo?.Email">@contactInfo?.Email</a></p>
+                                        <p><i class="fa fa-phone"></i> <a href="tel:@contactInfo?.Phone">@contactInfo?.Phone</a></p>
                                     </div>
                                 </div>
                             </div>

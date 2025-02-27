@@ -12,7 +12,7 @@ namespace BusinessLayer.Helper
         {
             switch (message)
             {
-                case "Password requires at least 1 digit":
+                case "Password requires at least 1 digit.":
                     return "Şifre en az 1 rakam içermelidir.";
                 case "Passwords must have at least one lowercase ('a'-'z').":
                     return "Şifre en az 1 küçük harf içermelidir.";
