@@ -1,6 +1,8 @@
 ﻿@using EntityLayer.Entities
+
 @{
     var Categories = ViewBag.Categories as List<RoomCategory>;
+    var contactInfo = ViewBag.ContactInfo as ContactInformations;
 }
 
 <!DOCTYPE html>
@@ -167,9 +169,9 @@
                                         <a href="#"><img src="~/images/gallery/logoarien.jpg" alt=""></a>
                                     </div>
                                     <div class="text">
-                                        <p><i class="lotus-icon-location"></i> Yukari Mevkii Zafer Sokak NO:36 Mustafapaşa Köyü/Ürgüp/Nevşehir</p>
-                                        <p><i class="lotus-icon-phone"></i> +90 384 353 53 30</p>
-                                        <p><i class="fa fa-envelope-o"></i> <a href="mailto:info@ariencavehotel.com">info@ariencavehotel.com</a></p>
+                                        <p><i class="lotus-icon-location"></i> @contactInfo.Address</p>
+                                        <p><i class="fa fa-envelope-o"></i> <a href="mailto:@contactInfo.Email">@contactInfo.Email</a></p>
+                                        <p><i class="fa fa-phone"></i> <a href="tel:@contactInfo.Phone">@contactInfo.Phone</a></p>
                                     </div>
                                 </div>
                             </div>

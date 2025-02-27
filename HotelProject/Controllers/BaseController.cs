@@ -2,21 +2,15 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 
-public class BaseController : Controller
+public class BaseController(RoomService roomService, HomeService homeService) : Controller
 {
-    private readonly RoomService _roomService;
-
-    public BaseController(RoomService roomService)
-    {
-        _roomService = roomService;
-    }
-
     public override void OnActionExecuting(ActionExecutingContext context)
     {
         base.OnActionExecuting(context);
 
-        var result2 = _roomService.GetRoomCategories();
-
+        var result2 = roomService.GetRoomCategories();
+        var result3 = homeService.GetContactInformations();
+        ViewBag.ContactInfo = result3;
         if (result2 != null)
         {
             ViewBag.Categories = result2;

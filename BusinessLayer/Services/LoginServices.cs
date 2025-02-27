@@ -74,7 +74,36 @@ namespace BusinessLayer.Services
             return string.Join("\n", errorMessages);
         }
 
-    
+        public async Task<string> ChangePassword(PasswordChangeModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return "Kullanıcı bulunamadı.";
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+            if (result.Succeeded)
+            {
+                return "Şifre başarıyla değiştirildi.";
+            }
+            else
+            {
+
+                var errorMessages = result.Errors
+                 .Select(e => errorMessageHelper.TranslateErrorMessage(e.Description))
+                 .SelectMany(desc => desc.Split('.').Where(s => !string.IsNullOrWhiteSpace(s)))
+                 .ToList();
+                return "<div style='text-align:center'>" +
+                       "<h6 style='text-align:left;'>Şifre değiştirilirken bir hata oluştu:</h6>" +  // Başlık sola yaslanır
+                       "<div>" +
+                       "<ul>" +
+                       string.Join("", errorMessages.Select(msg => $"<li style='float:left'>{msg}</li>")) +
+                       "</ul>" +
+                       "</div></div>";
+            }
+        }
 
 
     }
