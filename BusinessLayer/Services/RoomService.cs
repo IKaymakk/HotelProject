@@ -286,25 +286,6 @@ namespace BusinessLayer.Services
                 throw new Exception("Error updating room details", ex);
             }
         }
-        public async Task<string> ChangePassword(PasswordChangeModel model)
-        {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
-                return "Kullanıcı bulunamadı.";
-            }
-
-            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-
-            if (result.Succeeded)
-            {
-                return "Şifre başarıyla değiştirildi.";
-            }
-            else
-            {
-
-                return "Şifre değiştirilirken bir hata oluştu: " + string.Join(", ", result.Errors.Select(e => e.Description));
-            }
-        }
+      
     }
 }

@@ -9,45 +9,19 @@ using System.Net;
 
 namespace HotelProject.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger, RoomService roomService, HomeService homeService, EmailService mailService) : BaseController(roomService, homeService)
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly HomeService _homeService;
-        private readonly RoomService _roomService;
-        private readonly EmailService _mailService;
-
-        public HomeController(ILogger<HomeController> logger, HomeService homeService, RoomService roomService, EmailService mailService)
-        {
-            _logger = logger;
-            _homeService = homeService;
-            _roomService = roomService;
-            _mailService = mailService;
-        }
-
-
         public IActionResult Index()
         {
             try
             {
-                var result = _homeService.GetMainPageRooms();
-                var result2 = _roomService.GetRoomCategories();
 
-                if (result2 != null)
-                {
-                    ViewBag.Categories = result2;
-                }
-                if (result != null)
-                {
-                    return View(result);
-                }
-                else
-                {
-                    return View();
-                }
+                return View();
             }
+
             catch (Exception ex)
             {
-                _logger.LogError("Error getting rooms: ", ex);
+                logger.LogError("Error getting rooms: ", ex);
                 return View();
             }
 
@@ -60,7 +34,7 @@ namespace HotelProject.Controllers
         }
         public IActionResult Room()
         {
-            var rooms = _roomService.GetCategoriesWithRooms();
+            var rooms = roomService.GetCategoriesWithRooms();
             return View(rooms);
         }
         public IActionResult RoomDetails()
@@ -73,7 +47,7 @@ namespace HotelProject.Controllers
         }
         public IActionResult Detail(int id)
         {
-            RoomDTO room = _roomService.GetRoomDetail(id);
+            RoomDTO room = roomService.GetRoomDetail(id);
             return View(room);
         }
         public IActionResult Detail301()
@@ -117,9 +91,13 @@ namespace HotelProject.Controllers
         [HttpPost]
         public async Task<JsonResult> SendMail(MailModel model)
         {
-            var result = await _mailService.SendMailAsync(model);
+            var result = await mailService.SendMailAsync(model);
             return Json(new { success = result });
         }
+
+
+
+
 
 
 

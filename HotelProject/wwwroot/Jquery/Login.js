@@ -71,24 +71,38 @@ function Logout() {
 
 
 function ChangePassword() {
+    var oldPassword = $("#OldPassword").val();
+    var newPassword = $("#NewPassword").val();
+    var email = $("#Email").val();
+
+    if (!oldPassword || !newPassword || !email) {
+        Swal.fire({
+            title: "Hata!",
+            text: "E-posta, eski şifre ve yeni şifre alanları boş olamaz.",
+            icon: "error",
+            confirmButtonText: "Tamam"
+        });
+        return;  
+    }
+
     var formData = $("#ChangePasswordForm").serialize();
 
     $.ajax({
-        url: "/Admin/ChangePassword/",
+        url: "/Login/ChangePassword/",
         type: "POST",
         data: formData,
         success: function (result) {
             if (result.success == true) {
                 Swal.fire({
                     title: "Başarılı!",
-                    text: result.message,
+                    html: result.message,  
                     icon: "success",
                     confirmButtonText: "Tamam"
                 })
             } else {
                 Swal.fire({
                     title: "Hata!",
-                    text: result.message,
+                    html: result.message,  
                     icon: "error",
                     confirmButtonText: "Tamam"
                 })
@@ -97,7 +111,7 @@ function ChangePassword() {
         error: function () {
             Swal.fire({
                 title: "Hata!",
-                text: "error",
+                text: "Bir hata oluştu.",
                 icon: "error",
                 confirmButtonText: "Tamam"
             })

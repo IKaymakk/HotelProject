@@ -53,6 +53,19 @@ namespace BusinessLayer.Services
                 _logger.LogError("Error getting room images: ", ex);
                 return null;
             }
+        }  
+        public ContactInformations GetContactInformations()
+        {
+            try
+            {
+                var contactInformations = _context.ContactInformations.First(); 
+                return contactInformations;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting contact infos: ", ex);
+                return null;
+            }
         }   
       
 
