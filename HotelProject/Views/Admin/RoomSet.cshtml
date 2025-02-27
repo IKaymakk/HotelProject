@@ -42,7 +42,7 @@
                         <ul class="nav nav-tabs row" id="myTab" role="tablist">
 
                             <li class="nav-item col-3">
-                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#odaözellik" role="tab" aria-controls="contact" aria-selected="false">Oda Özellikleri</a>
+                                <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#odaözellik" role="tab" aria-controls="contact" aria-selected="false">Oda Özellikleri</a>
                             </li>
                             <li class="nav-item col-3">
                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#odaresim" role="tab" aria-controls="contact" aria-selected="false">Oda Resimleri</a>
@@ -83,40 +83,35 @@
 
 
                             <div class="tab-pane fade" id="odaresim" role="tabpanel" aria-labelledby="contact-tab">
-                                <div class="col-md-12">
-
-                                    <div class="form-group row align-items-center">
-                                        <div class="card-header">
-                                            <h4 style="margin-left:40px;">Oda Resimleri:</h4>
-
-                                            <div class="buttons">
-
-                                                <button class="btn btn-primary" onclick="openPictureModal()" style="margin-left:12px; border-radius:0px;">Resim Ekle</button>
-                                                <button class="btn btn-primary" onclick="openEditPicModal()" style="margin-left:12px; border-radius:0px;">Düzenle</button>
-
-                                            </div>
-
-
-                                        </div>
-
-                                        <div class="container">
-                                            <div class="row" id="imageContainer">
-                                                <div class="col-md-12 image-box" id="imageSubContainer" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                                    @foreach (var image in firstRoom?.RoomImages)
-                                                    {
-                                                        <div class="image-wrapper" style="flex: 1 1 18%; max-width: 18%; box-sizing: border-box;">
-                                                            <img src="data:image/jpeg;base64,@image.FileData" class="img-fluid" id="roomImage">
-                                                            <button class="btn btn-danger delete-btn" onclick="deleteImage(@image.ImageId)">Sil</button>
-                                                        </div>
-                                                    }
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header d-flex justify-content-between align-items-center">
+                                                    <h4>Oda Resimleri:</h4>
+                                                    <div class="buttons">
+                                                        <button style="border-radius:0px;" class="btn btn-primary" onclick="openPictureModal()">Resim Ekle</button>
+                                                        <button style="border-radius:0px;" class="btn btn-primary" onclick="openEditPicModal()">Düzenle</button>
+                                                    </div>
                                                 </div>
-
+                                                <div class="card-body">
+                                                    <div class="row mt-3" id="imageContainer">
+                                                        @foreach (var image in firstRoom?.RoomImages)
+                                                        {
+                                                            <div class="col-md-3 image-box text-center">
+                                                                <img src="data:image/jpeg;base64,@image.FileData" class="img-fluid" id="roomImage">
+                                                                <button class="btn btn-danger delete-btn mt-2" onclick="deleteImage(@image.ImageId)">Sil</button>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="tab-pane fade show active" id="odapop" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="container">
                                     <div class="row">
@@ -131,37 +126,31 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-label">Oda Fiyatı:</label>
-                                            <div class="d-flex justify-content-between ms-3">
-                                                <input class="form-control" type="text" id="roomPrice" value="@firstRoom?.Price">
-                                            </div>
+                                            <input class="form-control" type="text" id="roomPrice" value="@firstRoom?.Price">
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-label">Kapasite:</label>
-                                            <div class="d-flex justify-content-between ms-3">
-                                                <input class="form-control" type="text" id="capacity" value="@firstRoom?.Capacity">
-                                            </div>
+                                            <input class="form-control" type="text" id="capacity" value="@firstRoom?.Capacity">
                                         </div>
-
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row mt-3">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="form-label">Oda Açıklaması</label>
-                                                <textarea class="form-control" id="description" rows="5" value="">@firstRoom?.Description</textarea>
+                                                <textarea class="form-control" id="description" rows="5">@firstRoom?.Description</textarea>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-2  float-right">
-                                            <div class="text-centert">
-                                                <button class="btn btn-primary" type="button" onclick="updateExtraSettings()">Kaydet</button>
-                                            </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 text-end">
+                                            <button class="btn btn-primary" type="button" onclick="updateExtraSettings()">Kaydet</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
