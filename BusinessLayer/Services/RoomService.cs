@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using AutoMapper.Features;
+using DataAccessLayer;
 using DataAccessLayer.DataAccessLayer;
 using EntityLayer.DTO;
 using EntityLayer.Entities;
+using HotelProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -13,12 +16,15 @@ namespace BusinessLayer.Services
         private readonly ILogger<RoomService> _logger;
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-
-        public RoomService(ILogger<RoomService> logger, ApplicationDbContext context, IMapper mapper)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public RoomService(ILogger<RoomService> logger, ApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _logger = logger;
             _mapper = mapper;
+                _userManager = userManager;
+            _signInManager = signInManager;
 
         }
 
@@ -260,5 +266,45 @@ namespace BusinessLayer.Services
             }
         }
 
+        public bool UpdateExtraSettings(Room model)
+        {
+            try
+            {
+                var room = _context.Rooms.FirstOrDefault(r => r.Id == model.Id);
+                if (room == null)
+                    return false;
+                room.Price = model.Price;
+                room.Description = model.Description;
+                room.Capacity = model.Capacity;
+                room.isMainPage = model.isMainPage;
+
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating room details", ex);
+            }
+        }
+        public async Task<string> ChangePassword(PasswordChangeModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return "Kullanıcı bulunamadı.";
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+            if (result.Succeeded)
+            {
+                return "Şifre başarıyla değiştirildi.";
+            }
+            else
+            {
+
+                return "Şifre değiştirilirken bir hata oluştu: " + string.Join(", ", result.Errors.Select(e => e.Description));
+            }
+        }
     }
 }

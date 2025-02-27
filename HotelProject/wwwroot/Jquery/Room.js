@@ -93,7 +93,7 @@ function updateFeatures() {
 
     $(".form-check-input:checked").each(function () {
         var featureId = $(this).attr("id");
-        var featureValue = $(this).closest("li").find("input[type='text']").val();  
+        var featureValue = $(this).closest("li").find("input[type='text']").val();
 
         selectedFeatures.push({ FeatureId: featureId, Features: featureValue });
     });
@@ -109,7 +109,7 @@ function updateFeatures() {
     $.ajax({
         type: 'POST',
         url: '/Admin/UpdateFeatures',
-        data: { Features: selectedFeatures }, 
+        data: { Features: selectedFeatures },
         success: function (response) {
             if (response.success == true) {
                 Swal.fire({
@@ -136,10 +136,10 @@ function updateFeatures() {
 
 }
 function deleteFeatures() {
-    var selectedFeatures = []; 
+    var selectedFeatures = [];
 
     $(".form-check-input:checked").each(function () {
-        selectedFeatures.push($(this).attr('id'));  
+        selectedFeatures.push($(this).attr('id'));
     });
 
     if (selectedFeatures.length === 0) {
@@ -155,7 +155,7 @@ function deleteFeatures() {
     $.ajax({
         type: 'POST',
         url: '/Admin/DeleteFeatures',
-        data: { FeatureIds: selectedFeatures },  
+        data: { FeatureIds: selectedFeatures },
         traditional: true,
         success: function (response) {
             if (response.success == true) {
@@ -165,7 +165,7 @@ function deleteFeatures() {
                     text: 'Özellik başarıyla silindi!',
                     confirmButtonText: 'Tamam'
                 });
-                GetRoomDetail("Feature");  
+                GetRoomDetail("Feature");
                 GetRoomDetail("General");
 
             } else {
@@ -261,7 +261,16 @@ function GetRoomDetail(ForWhat) {
         data: { roomId: roomId },
         success: function (response) {
             if (ForWhat == "General") {
-                $("#roomPrice").text(response.data.price)
+                $("#roomPrice").val(response.data.price)
+                const value = response.data.isMainPage;
+                if (value ==false) {
+                    $("#isMainPage").val(0);
+                }
+                else {
+                    $("#isMainPage").val(1);
+                }
+                $("#description").val(response.data.description)
+                $('#capacity').val(response.data.capacity)
                 var imageSubContainer = $("#imageSubContainer");
                 imageSubContainer.html("");
                 response.data.roomImages.forEach(function (image) {
@@ -293,14 +302,13 @@ function GetRoomDetail(ForWhat) {
                 });
 
             }
-            else if (ForWhat == "Feature")
-            {
+            else if (ForWhat == "Feature") {
                 var featureContainer = $("#featureContainer");
                 featureContainer.html("")
                 response.data.roomFeatures.forEach(function (feature) {
-                    var listItem = $('<li class="list-group-item d-flex align-items-center"></li>'); 
+                    var listItem = $('<li class="list-group-item d-flex align-items-center"></li>');
 
-                    var checkbox = $('<input type="checkbox" class="form-check-input me-2" id="'+feature.featureId+'">');
+                    var checkbox = $('<input type="checkbox" class="form-check-input me-2" id="' + feature.featureId + '">');
                     var inputField = $('<input type="text" class="form-control ms-2" value="' + feature.features + '">');
                     listItem.append(checkbox).append(inputField);
                     featureContainer.append(listItem);
@@ -332,5 +340,46 @@ function DeSelectAll() {
 
     checkboxes.each(function () {
         $(this).prop('checked', false);
+    });
+}
+
+
+
+function updateExtraSettings() {
+    var formData = {
+        Id: $('#roomNumber').val(),
+        Price: parseFloat($('#roomPrice').val(), 10),
+        Description: $('#description').val(),
+        Capacity: parseInt($('#capacity').val(), 10),
+        isMainPage: $('#isMainPage').val() == 1 ? true : false
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/UpdateExtraSettings',
+        data:formData,
+        //contentType: 'application/json; charset=utf-8', 
+        //dataType: 'json', 
+        success: function (response) {
+            if (response.success == true) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: 'Başarıyla güncellendi!',
+                    confirmButtonText: 'Tamam'
+                });
+                GetRoomDetail("General")
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Güncellenirken bir hata oluştu!',
+                    confirmButtonText: 'Tamam'
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            alert('Beklenmedik bir hata oluştu: ' + error);
+        }
     });
 }

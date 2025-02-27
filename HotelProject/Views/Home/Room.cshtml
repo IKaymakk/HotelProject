@@ -1,5 +1,9 @@
 ﻿@using EntityLayer.DTO
+@using EntityLayer.Entities
 @model List<RoomCategoryDTO>
+
+
+
 
 <section class="section-sub-banner bg-9">
     <div class="awe-overlay"></div>
@@ -23,20 +27,27 @@
                 <div class="row">
                     @foreach (var room in category.Rooms)
                     {
+                        var coverImage = room.RoomImages.Where(x => x.isCoverImage == true).FirstOrDefault()?.FileData;
+                        var base64Image = coverImage != null ? Convert.ToBase64String(coverImage) : null;
+
+
                         <div class="col-md-12" style="margin-bottom:30px;">
-                            <div class="room_item-6" data-background="">
+                            <div class="room_item-6" data-background="data:image/png;base64,@base64Image">
                                 <div class="text">
-                                    <h2><a href="/Home/RoomDetail?roomId=@room.Id">@room.Name</a></h2>
+                                    <h5>
+                                        <a href="/Home/Detail?Id=@room.Id" class="text-white">@category.Name / @room.Name</a>
+                                    </h5>
                                     <span class="price">Günlük @room.Price₺ başlayan fiyatlarla.</span>
                                     <p>@room.Description</p>
                                     <ul>
-                                        <li>Maksimum: 2 Kişi</li>
+                                        <li>Maksimum: @room.Capacity Kişi</li>
                                     </ul>
                                     <a href="/Home/Detail?Id=@room.Id" class="awe-btn awe-btn-13">Detayları Görüntüle</a>
                                 </div>
                             </div>
                         </div>
                     }
+
                 </div>
             </div>
         }

@@ -18,7 +18,7 @@ namespace BusinessLayer.Profiles
                         ImageId = r.ImageId
                     }).ToList()))
 
-        .ForMember(dest => dest.RoomFeatures, opt => opt.MapFrom(src => src.RoomFeatures));
+             .ForMember(dest => dest.RoomFeatures, opt => opt.MapFrom(src => src.RoomFeatures));
 
             CreateMap<RoomImages, RoomImageDTO>();
 

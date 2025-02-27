@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Services;
 using EntityLayer.DTO;
 using EntityLayer.Entities;
+using HotelProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -324,7 +325,52 @@ namespace HotelProject.Controllers
                 _logger.LogError("Error getting room details: ", ex);
                 return Json(new { success = false, error = ex.Message });
             }
+        } 
+        [HttpPost]
+        public JsonResult UpdateExtraSettings( Room model)
+        {
+            try
+            {
+                var result  =  _roomService.UpdateExtraSettings(model);
+
+                if (result !=false)
+                {
+                    return Json(new { success = true });
+                }
+
+                return Json(new { success = false});
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting room details: ", ex);
+                return Json(new { success = false, error = ex.Message });
+            }
         }
+
+
+        [HttpPost]
+        public async Task<JsonResult> ChangePassword(PasswordChangeModel model)
+        {
+            var result = await _roomService.ChangePassword(model);
+
+            if (result == "Şifre başarıyla değiştirildi.")
+            {
+                return Json(new { success = true, redirectUrl = Url.Action("Index", "Home") });
+            }
+            else if (result == "Kullanıcı bulunamadı.")
+            {
+                return Json(new { success = false, message = "Kullanıcı bulunamadı." });
+            }
+            else if (result.Contains("Şifre değiştirilirken bir hata oluştu"))
+            {
+                return Json(new { success = false, message = result });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Bilinmeyen bir hata oluştu." });
+            }
+        }
+
 
     }
 }

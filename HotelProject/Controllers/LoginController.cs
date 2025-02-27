@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Services;
 using DataAccessLayer;
+using HotelProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,8 +53,8 @@ public class LoginController : Controller
     {
         await _signInManager.SignOutAsync();
         return Json(new { success = true, redirectUrl = Url.Action("Index", "Home") });
-    }
-
+    } 
+   
 
 
 }

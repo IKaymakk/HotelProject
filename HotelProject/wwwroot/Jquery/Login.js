@@ -27,7 +27,7 @@ function Register() {
         type: "POST",
         data: formData,
         success: function (result) {
-            if (result.success==true) {
+            if (result.success == true) {
                 Swal.fire({
                     title: "Başarılı!",
                     text: result.message,
@@ -46,7 +46,7 @@ function Register() {
             var errorMessage = xhr.responseText || "Kayıt başarısız!";
             Swal.fire({
                 title: "Hata!",
-                html: errorMessage.replace(/\n/g, "<br>"), 
+                html: errorMessage.replace(/\n/g, "<br>"),
                 icon: "error",
                 confirmButtonText: "Tamam"
             });
@@ -65,6 +65,42 @@ function Logout() {
         },
         error: function () {
             alert("Çıkış işlemi sırasında bir hata oluştu.");
+        }
+    });
+}
+
+
+function ChangePassword() {
+    var formData = $("#ChangePasswordForm").serialize();
+
+    $.ajax({
+        url: "/Admin/ChangePassword/",
+        type: "POST",
+        data: formData,
+        success: function (result) {
+            if (result.success == true) {
+                Swal.fire({
+                    title: "Başarılı!",
+                    text: result.message,
+                    icon: "success",
+                    confirmButtonText: "Tamam"
+                })
+            } else {
+                Swal.fire({
+                    title: "Hata!",
+                    text: result.message,
+                    icon: "error",
+                    confirmButtonText: "Tamam"
+                })
+            }
+        },
+        error: function () {
+            Swal.fire({
+                title: "Hata!",
+                text: "error",
+                icon: "error",
+                confirmButtonText: "Tamam"
+            })
         }
     });
 }

@@ -14,6 +14,7 @@ namespace EntityLayer.DTO
         public string Price { get; set; }
         public string Description { get; set; }
         public int? Capacity { get; set; }
+        public bool? isMainPage { get; set; }
         public List<RoomImageDTO> RoomImages { get; set; } 
         public List<RoomFeatureDTO> RoomFeatures { get; set; } 
     }

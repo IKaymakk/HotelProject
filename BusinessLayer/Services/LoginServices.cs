@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Helper;
 using DataAccessLayer;
+using HotelProject.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BusinessLayer.Services
 {
@@ -72,6 +74,7 @@ namespace BusinessLayer.Services
             return string.Join("\n", errorMessages);
         }
 
+    
 
 
     }
