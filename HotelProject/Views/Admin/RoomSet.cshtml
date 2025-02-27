@@ -12,7 +12,7 @@
 
 
     <div class="section-body">
-        <div class="row justify-content-center">
+        <div class="justify-content-center" style="padding-left: 45px;">
             <div class="">
                 <div class="card">
                     <div class="card-header">
@@ -39,21 +39,21 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <ul class="nav nav-tabs row" id="myTab" role="tablist">
-
-                            <li class="nav-item col-3">
-                                <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#odaözellik" role="tab" aria-controls="contact" aria-selected="false">Oda Özellikleri</a>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#odaözellik" role="tab" aria-controls="odaözellik" aria-selected="true">Oda Özellikleri</a>
                             </li>
-                            <li class="nav-item col-3">
-                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#odaresim" role="tab" aria-controls="contact" aria-selected="false">Oda Resimleri</a>
+                            <li class="nav-item">
+                                <a class="nav-link" id="roomFeatures-tab" data-toggle="tab" href="#odaresim" role="tab" aria-controls="odaresim" aria-selected="false">Oda Resimleri</a>
                             </li>
-                            <li class="nav-item col-3">
-                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#odapop" role="tab" aria-controls="contact" aria-selected="false">Ekstra Ayarlar</a>
+                            <li class="nav-item">
+                                <a class="nav-link" id="extraRoomSettings-tab" data-toggle="tab" href="#odapop" role="tab" aria-controls="odapop" aria-selected="false">Ekstra Ayarlar</a>
                             </li>
                         </ul>
 
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade" id="odaözellik" role="tabpanel" aria-labelledby="contact-tab">
+                            <!-- Oda Özellikleri Tabı -->
+                            <div class="tab-pane fade show active" id="odaözellik" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-body">
@@ -61,7 +61,7 @@
                                                 <div class="col-12 d-flex justify-content-between align-items-center">
                                                     <h6 class="mt-3">Oda Özellikleri:</h6>
                                                     <div class="d-flex gap-2">
-                                                        <button style="margin-right:5px;" class="btn btn-primary btn-sm" onclick="openEditModal()">Düzenle</button>
+                                                        <button class="btn btn-primary btn-sm" onclick="openEditModal()">Düzenle</button>
                                                         <button class="btn btn-primary btn-sm" onclick="openAddFeatureModal()">Ekle</button>
                                                     </div>
                                                 </div>
@@ -81,8 +81,8 @@
                                 </div>
                             </div>
 
-
-                            <div class="tab-pane fade" id="odaresim" role="tabpanel" aria-labelledby="contact-tab">
+                            <!-- Oda Resimleri Tabı -->
+                            <div class="tab-pane fade" id="odaresim" role="tabpanel" aria-labelledby="roomFeatures-tab">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -90,15 +90,15 @@
                                                 <div class="card-header d-flex justify-content-between align-items-center">
                                                     <h4>Oda Resimleri:</h4>
                                                     <div class="buttons">
-                                                        <button style="border-radius:0px;" class="btn btn-primary" onclick="openPictureModal()">Resim Ekle</button>
-                                                        <button style="border-radius:0px;" class="btn btn-primary" onclick="openEditPicModal()">Düzenle</button>
+                                                        <button class="btn btn-primary" onclick="openPictureModal()">Resim Ekle</button>
+                                                        <button class="btn btn-primary" onclick="openEditPicModal()">Düzenle</button>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="row mt-3" id="imageContainer">
                                                         @foreach (var image in firstRoom?.RoomImages)
                                                         {
-                                                            <div class="image-wrapper" style="flex: 1 1 18%; max-width: 18%; box-sizing: border-box;">
+                                                            <div class="image-wrapper col-4 mb-3">
                                                                 <img src="data:image/jpeg;base64,@image.FileData" class="img-fluid" id="roomImage">
                                                                 <button class="btn btn-danger delete-btn" onclick="deleteImage(@image.ImageId)">Sil</button>
                                                             </div>
@@ -111,8 +111,8 @@
                                 </div>
                             </div>
 
-
-                            <div class="tab-pane fade show active" id="odapop" role="tabpanel" aria-labelledby="home-tab">
+                            <!-- Ekstra Ayarlar Tabı -->
+                            <div class="tab-pane fade" id="odapop" role="tabpanel" aria-labelledby="extraRoomSettings-tab">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-4">
@@ -150,9 +150,9 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
