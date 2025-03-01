@@ -285,7 +285,27 @@ namespace BusinessLayer.Services
             {
                 throw new Exception("Error updating room details", ex);
             }
-        }
+        } 
+        //public bool updateContactSettings(Room model)
+        //{
+        //    try
+        //    {
+        //        var room = _context.ContactInformations.FirstOrDefault(r => r.Id == model.Id);
+        //        if (room == null)
+        //            return false;
+        //        room.Price = model.Price;
+        //        room.Description = model.Description;
+        //        room.Capacity = model.Capacity;
+        //        room.isMainPage = model.isMainPage;
+
+        //        _context.SaveChanges();
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Error updating room details", ex);
+        //    }
+        //}
       
     }
 }

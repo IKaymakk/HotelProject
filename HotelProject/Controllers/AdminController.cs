@@ -345,6 +345,26 @@ namespace HotelProject.Controllers
                 _logger.LogError("Error getting room details: ", ex);
                 return Json(new { success = false, error = ex.Message });
             }
+        } 
+        [HttpPost]
+        public JsonResult updateContactSettings( ContactInformations model)
+        {
+            try
+            {
+                var result  =  _roomService.updateContactSettings(model);
+
+                if (result !=false)
+                {
+                    return Json(new { success = true });
+                }
+
+                return Json(new { success = false});
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting room details: ", ex);
+                return Json(new { success = false, error = ex.Message });
+            }
         }
 
 
