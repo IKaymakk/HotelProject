@@ -285,7 +285,7 @@ namespace BusinessLayer.Services
             {
                 throw new Exception("Error updating room details", ex);
             }
-        } 
+        }
         //public bool updateContactSettings(Room model)
         //{
         //    try
@@ -306,6 +306,6 @@ namespace BusinessLayer.Services
         //        throw new Exception("Error updating room details", ex);
         //    }
         //}
-      
+
     }
 }
