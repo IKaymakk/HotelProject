@@ -58,7 +58,7 @@
                                 <ul class="list-group" id="featureWrapper">
                                     @foreach (var feature in firstRoom?.RoomFeatures)
                                     {
-                                        <li class="list-group-item">@feature.Features</li>
+                                        <li class="list-group-item">@feature?.Features</li>
                                     }
                                 </ul>
                             </div>

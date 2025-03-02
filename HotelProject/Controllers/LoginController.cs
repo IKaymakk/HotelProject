@@ -19,10 +19,10 @@ public class LoginController : Controller
     {
         return View();
     }
-    public IActionResult Register()
-    {
-        return View();
-    }
+    //public IActionResult Register()
+    //{
+    //    return View();
+    //}
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model)
     {
