@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Services;
 using EntityLayer.DTO;
 using EntityLayer.Entities;
+using EntityLayer.ViewModel;
 using HotelProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography.Pkcs;
 
 namespace HotelProject.Controllers
 {
@@ -12,11 +14,13 @@ namespace HotelProject.Controllers
     {
         private readonly ILogger<AdminController> _logger;
         private readonly RoomService _roomService;
+        private readonly HomeService _homeService;
 
-        public AdminController(ILogger<AdminController> logger, RoomService roomService)
+        public AdminController(ILogger<AdminController> logger, RoomService roomService, HomeService homeService)
         {
             _logger = logger;
             _roomService = roomService;
+            _homeService = homeService;
         }
 
         public IActionResult SetSocialMedia()
@@ -66,7 +70,16 @@ namespace HotelProject.Controllers
 
         public IActionResult ResetPassword()
         {
-            return View();
+            var result = _homeService.GetAbout();
+            var result2 = _homeService.GetContactInformations();
+            var result3 = _homeService.GetSocialMediaLinks();
+            var model = new SettingsViewModel
+            {
+                AboutUs = result,
+                ContactInformations = result2,
+                SocialMediaLinks = result3,
+            };
+            return View(model);
         }
 
 
@@ -102,6 +115,7 @@ namespace HotelProject.Controllers
                 return Json(new { success = false, message = "Error updating room", error = ex.Message });
             }
         }
+
 
         [HttpPost]
         public JsonResult InsertFeatures([FromBody] RoomFeatures model)
@@ -218,7 +232,7 @@ namespace HotelProject.Controllers
                             FileName = imageFile.FileName,
                             FileType = imageFile.ContentType,
                             FileData = memoryStream.ToArray(),
-                            isCoverImage =false,
+                            isCoverImage = false,
                         };
 
                         _roomService.InsertRoomImages(roomImage);
@@ -385,8 +399,8 @@ namespace HotelProject.Controllers
                 return Json(new { success = false, error = ex.Message });
             }
         }
-           [HttpPost]
-        public JsonResult SetCoverImage(int ImageId,int RoomId)
+        [HttpPost]
+        public JsonResult SetCoverImage(int ImageId, int RoomId)
         {
             try
             {
@@ -402,6 +416,46 @@ namespace HotelProject.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Error getting room details: ", ex);
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult DeleteRoom(int RoomId)
+        {
+            try
+            {
+                var result = _roomService.DeleteRoom(RoomId);
+
+                if (result != false)
+                {
+                    return Json(new { success = true });
+                }
+
+                return Json(new { success = false });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error deleting room details: ", ex);
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult UpdateSocialMediaLinks(SocialMediaLinks model)
+        {
+            try
+            {
+                var result = _roomService.UpdateSocialMediaLinks(model);
+
+                if (result != false)
+                {
+                    return Json(new { success = true });
+                }
+
+                return Json(new { success = false });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error deleting room details: ", ex);
                 return Json(new { success = false, error = ex.Message });
             }
         }

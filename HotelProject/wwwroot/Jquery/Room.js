@@ -264,7 +264,7 @@ function GetRoomDetail(ForWhat) {
             if (ForWhat == "General") {
                 $("#roomPrice").val(response.data.price)
                 const value = response.data.isMainPage;
-                if (value ==false) {
+                if (value == false) {
                     $("#isMainPage").val(0);
                 }
                 else {
@@ -351,7 +351,7 @@ function updateExtraSettings() {
     $.ajax({
         type: 'POST',
         url: '/Admin/UpdateExtraSettings',
-        data:formData,
+        data: formData,
         //contentType: 'application/json; charset=utf-8', 
         //dataType: 'json', 
         success: function (response) {
@@ -384,7 +384,7 @@ function updateExtraSettings() {
 
 
 
-function setCoverImage(ImageId,RoomId) {
+function setCoverImage(ImageId, RoomId) {
 
     $.ajax({
         type: 'POST',
@@ -407,6 +407,80 @@ function setCoverImage(ImageId,RoomId) {
                     icon: 'error',
                     title: 'Hata!',
                     text: 'Resim ayarlanamadı: ' + (response.failed || []).join(", "),
+                    confirmButtonText: 'Tamam'
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Hata detayları:", xhr.responseText);
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata!',
+                text: 'Beklenmedik bir hata oluştu: ' + error,
+                confirmButtonText: 'Tamam'
+            });
+        }
+    });
+}
+
+function deleteRoom() {
+    var roomId = $("#roomNumber").val()
+
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/DeleteRoom',
+        data: {
+            RoomId: roomId
+        },
+        success: function (response) {
+            if (response.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: 'Seçili oda başarıyla silindi!',
+                    confirmButtonText: 'Tamam'
+                });
+                GetRoomDetail("General");
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Oda silinemedi',
+                    confirmButtonText: 'Tamam'
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Hata detayları:", xhr.responseText);
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata!',
+                text: 'Beklenmedik bir hata oluştu: ' + error,
+                confirmButtonText: 'Tamam'
+            });
+        }
+    });
+}
+
+function updateSocialMediaLinks() {
+    var formData = $("#socialMediaLinksForms").serialize()
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/UpdateSocialMediaLinks',
+        data: formData,
+        success: function (response) {
+            if (response.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: 'Başarıyla güncellendi!',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Güncellenemedi',
                     confirmButtonText: 'Tamam'
                 });
             }

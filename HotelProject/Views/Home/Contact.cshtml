@@ -1,4 +1,9 @@
-﻿<!-- SUB BANNER -->
+﻿@{
+    @using EntityLayer.Entities
+    var contactInfo = ViewBag.ContactInfo as ContactInformations;
+}
+
+<!-- SUB BANNER -->
 <section class="section-sub-banner bg-9">
     <div class="sub-banner">
         <div class="container">
@@ -21,9 +26,9 @@
                     <div class="text">
                         <h2>İletişim</h2>
                         <ul>
-                            <li><i class="icon lotus-icon-location"></i> Yukari Mevkii Zafer Sokak NO:36 Mustafapaşa Köyü/Ürgüp/Nevşehir</li>
-                            <li><i class="icon lotus-icon-phone"></i> +90 384 353 53 30</li>
-                            <li><i class="icon fa fa-envelope-o"></i> info@ariencavehotel.com</li>
+                            <li><i class="icon lotus-icon-location"></i> @contactInfo?.Address</li>
+                            <li><i class="icon lotus-icon-phone"></i> @contactInfo?.Phone</li>
+                            <li><i class="icon fa fa-envelope-o"></i> @contactInfo?.Email</li>
                         </ul>
                     </div>
 

@@ -350,6 +350,47 @@ namespace BusinessLayer.Services
                 throw new Exception("Kapak resmi güncellenirken hata oluştu", ex);
             }
         }
+        public bool DeleteRoom(int RoomId)
+        {
+            try
+            {
+                var room = _context.Rooms.Where(x=>x.Id== RoomId).FirstOrDefault();
+                room.isDeleted = true;
+
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating contact details", ex);
+            }
+        }
+        public bool UpdateSocialMediaLinks(SocialMediaLinks model)
+        {
+            try
+            {
+                var links = _context.SocialMediaLinks.FirstOrDefault();
+
+                if (links != null)
+                {
+                    links.FacebookLink = model.FacebookLink;
+                    links.InstagramLink = model.InstagramLink;
+
+                    _context.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("No social media links found to update.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating social media links", ex);
+            }
+        }
+
 
 
     }

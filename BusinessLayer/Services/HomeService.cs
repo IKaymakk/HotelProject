@@ -84,6 +84,19 @@ namespace BusinessLayer.Services
                 return null;
             }
         }
+          public SocialMediaLinks GetSocialMediaLinks()
+        {
+            try
+            {
+                var links = _context.SocialMediaLinks.First();
+                return links;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting contact infos: ", ex);
+                return null;
+            }
+        }
 
 
 
