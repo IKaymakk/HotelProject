@@ -354,7 +354,7 @@ namespace BusinessLayer.Services
         {
             try
             {
-                var room = _context.Rooms.Where(x=>x.Id== RoomId).FirstOrDefault();
+                var room = _context.Rooms.Where(x => x.Id == RoomId).FirstOrDefault();
                 room.isDeleted = true;
 
                 _context.SaveChanges();
@@ -390,6 +390,7 @@ namespace BusinessLayer.Services
                 throw new Exception("Error updating social media links", ex);
             }
         }
+      
 
 
 

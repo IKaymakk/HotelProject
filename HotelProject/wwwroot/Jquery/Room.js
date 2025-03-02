@@ -424,44 +424,60 @@ function setCoverImage(ImageId, RoomId) {
 }
 
 function deleteRoom() {
-    var roomId = $("#roomNumber").val()
+    var roomId = $("#roomNumber").val();
 
-    $.ajax({
-        type: 'POST',
-        url: '/Admin/DeleteRoom',
-        data: {
-            RoomId: roomId
-        },
-        success: function (response) {
-            if (response.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Başarılı!',
-                    text: 'Seçili oda başarıyla silindi!',
-                    confirmButtonText: 'Tamam'
-                });
-                GetRoomDetail("General");
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Hata!',
-                    text: 'Oda silinemedi',
-                    confirmButtonText: 'Tamam'
-                });
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Hata detayları:", xhr.responseText);
-            Swal.fire({
-                icon: 'error',
-                title: 'Hata!',
-                text: 'Beklenmedik bir hata oluştu: ' + error,
-                confirmButtonText: 'Tamam'
+    Swal.fire({
+        title: 'Emin misiniz?',
+        text: "Bu odayı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Evet, sil!',
+        cancelButtonText: 'İptal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/DeleteRoom',
+                data: {
+                    RoomId: roomId
+                },
+                success: function (response) {
+                  
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Başarılı!',
+                            text: 'Seçili oda başarıyla silindi!',
+                            confirmButtonText: 'Tamam'
+                        }).then((result) => {
+                            location.reload();
+                        });
+                       
+                 
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata!',
+                            text: 'Oda silinemedi',
+                            confirmButtonText: 'Tamam'
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Hata detayları:", xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Hata!',
+                        text: 'Beklenmedik bir hata oluştu: ' + error,
+                        confirmButtonText: 'Tamam'
+                    });
+                }
             });
         }
     });
 }
-
 function updateSocialMediaLinks() {
     var formData = $("#socialMediaLinksForms").serialize()
     $.ajax({
@@ -491,6 +507,39 @@ function updateSocialMediaLinks() {
                 icon: 'error',
                 title: 'Hata!',
                 text: 'Beklenmedik bir hata oluştu: ' + error,
+                confirmButtonText: 'Tamam'
+            });
+        }
+    });
+}
+
+function getRooms() {
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/GetRooms',
+        success: function (response) {
+            $('#roomNumber').empty();
+
+            if (response && response.length > 0) {
+                response.forEach(function (room) {
+                    $('#roomNumber').append($('<option>', {
+                        value: room.id,
+                        text: room.name
+                    }));
+                });
+            } else {
+                $('#roomNumber').append($('<option>', {
+                    value: '',
+                    text: 'No rooms available'
+                }));
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching rooms:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata!',
+                text: 'Odalar alınırken bir hata oluştu: ' + error,
                 confirmButtonText: 'Tamam'
             });
         }

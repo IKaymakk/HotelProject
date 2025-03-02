@@ -460,7 +460,12 @@ namespace HotelProject.Controllers
             }
         }
 
-
+        [HttpGet]
+        public JsonResult GetRooms()
+        {
+            var result = _roomService.GetRooms();
+            return Json(result);
+        }
 
 
     }
