@@ -19,7 +19,7 @@ namespace EntityLayer.Entities
         public string FileName { get; set; }
         public byte[] FileData { get; set; }
         public bool isDeleted { get; set; }
-        public bool? isCoverImage { get; set; }
+        public bool isCoverImage { get; set; }
         public virtual Room Room { get; set; }
     }
 }

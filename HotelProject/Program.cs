@@ -22,12 +22,12 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 8;
-    options.Password.RequiredUniqueChars = 2;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 1;
+    options.Password.RequiredUniqueChars = 1;
     options.SignIn.RequireConfirmedEmail = false;
 });
 
@@ -46,6 +46,7 @@ builder.Services.AddScoped<RoomService>();
 builder.Services.AddScoped<HomeService>();
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddLogging();
 
 var app = builder.Build();
 

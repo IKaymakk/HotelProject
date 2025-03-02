@@ -49,11 +49,11 @@ namespace HotelProject.Controllers
 
                 if (result != null)
                 {
-                    return View(result); 
+                    return View(result);
                 }
                 else
                 {
-                    return View(new List<RoomDTO>()); 
+                    return View(new List<RoomDTO>());
                 }
             }
             catch (Exception ex)
@@ -109,7 +109,7 @@ namespace HotelProject.Controllers
             try
             {
                 var result = _roomService.InsertFeatures(model);
-                if (result==true)
+                if (result == true)
                 {
                     return Json(new { success = true });
                 }
@@ -131,7 +131,7 @@ namespace HotelProject.Controllers
 
                 foreach (var FeatureId in FeatureIds)
                 {
-                    var result = _roomService.DeleteFeatures(FeatureId);  
+                    var result = _roomService.DeleteFeatures(FeatureId);
                     results.Add(result);
                 }
 
@@ -149,7 +149,7 @@ namespace HotelProject.Controllers
                 _logger.LogError("Error deleting features: ", ex);
                 return Json(new { success = false, message = "Error deleting features", error = ex.Message });
             }
-        } 
+        }
         [HttpPost]
         public JsonResult UpdateFeatures(List<RoomFeatureDTO> Features)
         {
@@ -159,11 +159,11 @@ namespace HotelProject.Controllers
 
                 foreach (var Feature in Features)
                 {
-                    var result = _roomService.UpdateFeatures(Feature);  
+                    var result = _roomService.UpdateFeatures(Feature);
                     results.Add(result);
                 }
 
-                if (results.Count!=0 && results.All(r => r))
+                if (results.Count != 0 && results.All(r => r))
                 {
                     return Json(new { success = true });
                 }
@@ -178,21 +178,19 @@ namespace HotelProject.Controllers
                 return Json(new { success = false, message = "Error deleting features", error = ex.Message });
             }
         }
-
-
         [HttpPost]
         public JsonResult DeleteImage(int ImageId)
         {
             try
             {
                 var result = _roomService.DeleteImage(ImageId);
-                if (result=="Success")
+                if (result == "Success")
                 {
                     return Json(new { success = true, data = result });
                 }
                 else
                 {
-                    return Json(new { success = false,data = result });
+                    return Json(new { success = false, data = result });
                 }
             }
             catch (Exception ex)
@@ -201,7 +199,6 @@ namespace HotelProject.Controllers
                 return Json(new { success = false, message = "Error deleting features", error = ex.Message });
             }
         }
-
         [HttpPost]
         public IActionResult InsertRoomImages([FromForm] List<IFormFile> imageFiles, [FromForm] int roomId)
         {
@@ -220,7 +217,8 @@ namespace HotelProject.Controllers
                             RoomId = roomId,
                             FileName = imageFile.FileName,
                             FileType = imageFile.ContentType,
-                            FileData = memoryStream.ToArray()
+                            FileData = memoryStream.ToArray(),
+                            isCoverImage =false,
                         };
 
                         _roomService.InsertRoomImages(roomImage);
@@ -275,7 +273,7 @@ namespace HotelProject.Controllers
         {
             return View();
         }
-        
+
         public ActionResult frmAddPicture()
         {
             return View();
@@ -311,7 +309,7 @@ namespace HotelProject.Controllers
         {
             try
             {
-                var result  =  _roomService.GetRoomDetail(roomId);
+                var result = _roomService.GetRoomDetail(roomId);
 
                 if (result != null)
                 {
@@ -325,47 +323,88 @@ namespace HotelProject.Controllers
                 _logger.LogError("Error getting room details: ", ex);
                 return Json(new { success = false, error = ex.Message });
             }
-        } 
+        }
         [HttpPost]
-        public JsonResult UpdateExtraSettings( Room model)
+        public JsonResult UpdateExtraSettings(Room model)
         {
             try
             {
-                var result  =  _roomService.UpdateExtraSettings(model);
+                var result = _roomService.UpdateExtraSettings(model);
 
-                if (result !=false)
+                if (result != false)
                 {
                     return Json(new { success = true });
                 }
 
-                return Json(new { success = false});
+                return Json(new { success = false });
             }
             catch (Exception ex)
             {
                 _logger.LogError("Error getting room details: ", ex);
                 return Json(new { success = false, error = ex.Message });
             }
-        } 
-        //[HttpPost]
-        //public JsonResult updateContactSettings( ContactInformations model)
-        //{
-        //    try
-        //    {
-        //        var result  =  _roomService.updateContactSettings(model);
+        }
 
-        //        if (result !=false)
-        //        {
-        //            return Json(new { success = true });
-        //        }
+        [HttpPost]
+        public JsonResult updateContactSettings(ContactInformations model)
+        {
+            try
+            {
+                var result = _roomService.updateContactSettings(model);
 
-        //        return Json(new { success = false});
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError("Error getting room details: ", ex);
-        //        return Json(new { success = false, error = ex.Message });
-        //    }
-        //}
+                if (result != false)
+                {
+                    return Json(new { success = true });
+                }
+
+                return Json(new { success = false });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting room details: ", ex);
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult updateAboutUsSettings(AboutUs model)
+        {
+            try
+            {
+                var result = _roomService.updateAboutUsSettings(model);
+
+                if (result != false)
+                {
+                    return Json(new { success = true });
+                }
+
+                return Json(new { success = false });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting room details: ", ex);
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+           [HttpPost]
+        public JsonResult SetCoverImage(int ImageId,int RoomId)
+        {
+            try
+            {
+                var result = _roomService.SetCoverImage(ImageId, RoomId);
+
+                if (result != false)
+                {
+                    return Json(new { success = true });
+                }
+
+                return Json(new { success = false });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting room details: ", ex);
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
 
 
 

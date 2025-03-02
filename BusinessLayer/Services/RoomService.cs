@@ -23,7 +23,7 @@ namespace BusinessLayer.Services
             _context = context;
             _logger = logger;
             _mapper = mapper;
-                _userManager = userManager;
+            _userManager = userManager;
             _signInManager = signInManager;
 
         }
@@ -286,26 +286,71 @@ namespace BusinessLayer.Services
                 throw new Exception("Error updating room details", ex);
             }
         }
-        //public bool updateContactSettings(Room model)
-        //{
-        //    try
-        //    {
-        //        var room = _context.ContactInformations.FirstOrDefault(r => r.Id == model.Id);
-        //        if (room == null)
-        //            return false;
-        //        room.Price = model.Price;
-        //        room.Description = model.Description;
-        //        room.Capacity = model.Capacity;
-        //        room.isMainPage = model.isMainPage;
+        public bool updateContactSettings(ContactInformations model)
+        {
+            try
+            {
+                var contact = _context.ContactInformations.FirstOrDefault();
+                if (contact == null)
+                    return false;
+                contact.Email = model.Email;
+                contact.Phone = model.Phone;
+                contact.Address = model.Address;
 
-        //        _context.SaveChanges();
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Error updating room details", ex);
-        //    }
-        //}
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating contact details", ex);
+            }
+        }
+        public bool updateAboutUsSettings(AboutUs model)
+        {
+            try
+            {
+                var about = _context.AboutUs.FirstOrDefault();
+                if (about == null)
+                    return false;
+                about.AboutUsHeader = model.AboutUsHeader;
+                about.AboutUsText = model.AboutUsText;
+                about.AboutUsHeader2 = model.AboutUsHeader2;
+                about.AboutUsText2 = model.AboutUsText2;
+
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating about details", ex);
+            }
+        }
+        public bool SetCoverImage(int ImageId, int RoomId)
+        {
+            try
+            {
+                var image = _context.RoomImages.FirstOrDefault(x => x.ImageId == ImageId && x.RoomId == RoomId);
+                if (image == null)
+                {
+                    return false;
+                }
+
+                var existingCover = _context.RoomImages.Where(x => x.RoomId == RoomId && x.isCoverImage).ToList();
+                foreach (var img in existingCover)
+                {
+                    img.isCoverImage = false;
+                }
+
+                image.isCoverImage = true;
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Kapak resmi güncellenirken hata oluştu", ex);
+            }
+        }
+
 
     }
 }

@@ -17,6 +17,7 @@ namespace DataAccessLayer
             public DbSet<RoomImages> RoomImages { get; set; }
             public DbSet<RoomCategory> RoomCategories { get; set; }
             public DbSet<ContactInformations> ContactInformations { get; set; }
+            public DbSet<AboutUs> AboutUs { get; set; }
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<Room>()

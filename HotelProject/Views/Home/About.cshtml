@@ -1,7 +1,9 @@
-﻿@{
+﻿@using EntityLayer.Entities
+
+@{
     Layout = "_Layout";
 }
-
+@model  AboutUs
 <!-- SUB BANNER -->
 <section class="section-sub-banner bg-9">
     <div class="awe-overlay"></div>
@@ -32,14 +34,10 @@
                 </div>
 
                 <div class="text">
-                    <h2 class="heading">Hakkımızda</h2>
+                    <h2 class="heading">@Model.AboutUsHeader</h2>
                     <div class="desc">
                         <p>
-                            Arien Cave Suites, Kapadokya'nın büyüleyici doğası ve tarihi dokusunu misafirlerine unutulmaz bir konaklama deneyimiyle birleştirmek amacıyla kurulmuş, özgün ve lüks bir yaşam alanıdır. Peri bacalarının içine oyulmuş bu eşsiz suitler, bölgenin otantik atmosferini korurken modern konforun tüm imkanlarını sunar. Misafirlerimizin Kapadokya'nın sihirli havasını en iyi şekilde hissetmeleri için her detayı özenle düşündük. Geniş ve ferah suitlerimiz, doğal taşların dokusu, şık tasarımı ve gün ışığını içeri alan büyük pencereleriyle sıcak ve davetkar bir atmosfer yaratır.
-
-                            Arien Cave Suites olarak, misafirlerimizin her anını özel kılmak için kişiselleştirilmiş hizmet anlayışını benimsiyoruz. Kapadokya'nın eşsiz manzarası eşliğinde sunulan yerel ve uluslararası lezzetler, restoranımızda misafirlerimizin damak zevkine hitap ediyor. Ayrıca, bölgenin doğal güzelliklerini keşfetmek isteyen misafirlerimiz için balon turları, at safarileri, yürüyüş rotaları ve kültürel geziler gibi birçok aktivite seçeneği sunuyoruz.
-
-                            Sürdürülebilir turizm anlayışıyla doğaya saygılı bir yaklaşım benimseyerek, Kapadokya'nın eşsiz mirasını korumayı ve gelecek nesillere aktarmayı hedefliyoruz. Arien Cave Suites, sadece bir konaklama mekanı değil, aynı zamanda Kapadokya'nın ruhunu hissedebileceğiniz, huzur bulacağınız ve unutulmaz anılar biriktireceğiniz bir yaşam alanıdır. Misafirlerimizin memnuniyeti ve mutluluğu, bizim için her zaman en büyük önceliktir. Sizi, Kapadokya'nın büyüsünü Arien Cave Suites'te yaşamaya davet ediyoruz.
+                            @Model.AboutUsText
                         </p>
                     </div>
                 </div>
@@ -55,11 +53,13 @@
 
                 <div class="text">
                     <h2 class="heading">
-                        Misafirler Neden Arien Cave Suistes'i Tercih Ediyor?
+                        @Model.AboutUsHeader2
 
                     </h2>
                     <div class="desc">
-                        <p>Arien Cave Suites, Kapadokya'nın büyüleyici manzarası ve tarihi dokusuyla bütünleşen eşsiz bir konaklama deneyimi sunar. Peri bacalarının içine oyulmuş bu özel suitler, misafirlerine hem doğanın mucizesini hem de modern lüksün konforunu bir arada yaşama fırsatı veriyor. Her suit, Kapadokya'nın otantik atmosferini korurken, çağdaş tasarım ve yüksek standartlardaki olanaklarla donatılmıştır. Geniş pencerelerden süzülen gün ışığı, odalara sıcak bir hava katarak misafirlerin kendilerini özel hissetmelerini sağlıyor. Arien Cave Suites, özellikle gün doğumu sırasında balonlarla kaplanan gökyüzü manzarasıyla unutulmaz anlar yaşatırken, samimi ve kişiselleştirilmiş hizmet anlayışıyla misafirlerinin her ihtiyacını önceden düşünüyor. Otelin restoranı, bölgenin yerel lezzetlerini modern bir dokunuşla sunarak damak zevkine hitap ediyor. Ayrıca, Kapadokya'nın eşsiz doğasında yapılabilecek yürüyüşler, at turları ve kültürel geziler gibi aktivitelerle misafirlerine farklı deneyimler sunuyor. Arien Cave Suites, tarih, doğa ve lüksü bir araya getirerek misafirlerine sıra dışı bir konaklama deneyimi vaat ediyor.</p>
+                        <p>
+                            @Model.AboutUsText2
+                        </p>
                     </div>
                 </div>
 
