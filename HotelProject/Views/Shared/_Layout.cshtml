@@ -3,6 +3,7 @@
 @{
     var categories = ViewBag.Categories as List<RoomCategory>;
     var contactInfo = ViewBag.ContactInfo as ContactInformations;
+    var socialMediaLinks = ViewBag.SocialMediaLinks as SocialMediaLinks;
 }
 
 <!DOCTYPE html>
@@ -114,8 +115,8 @@
                         <div class="col-lg-3">
                             <div class="social">
                                 <div class="social-content">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="@socialMediaLinks?.FacebookLink"><i class="fa fa-facebook"></i></a>
+                                    <a href="@socialMediaLinks?.InstagramLink"><i class="fa fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
