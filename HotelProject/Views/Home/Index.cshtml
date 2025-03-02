@@ -85,63 +85,29 @@
                 <div class="accomd-modations-slide_1">
 
                     <!-- ITEM -->
-                    <div class="accomd-modations-room_1">
-
-                        <div class="img">
-                            <a href="#"><img src="~/images/CAVESUİTIND.jpg" alt=""></a>
-                        </div>
-
-                        <div class="text">
-                            <h2><a href="#">Cave Suit Oda</a></h2>
-                            <p class="desc">Tarihi dokuyu modern konforla buluşturan mağara süitlerimiz, doğal taş duvarları ve otantik dekoruyla eşsiz bir deneyim sunar.</p>
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout"></span> 
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">DETAYLARI GÖRÜNTÜLE</a>
+                    @foreach (var room in Model)
+                    {
+                        
+                        var coverImage = room.RoomImages.Where(x => x.isCoverImage == true).FirstOrDefault()?.FileData;
+                                    var base64Image = coverImage != null ? Convert.ToBase64String(coverImage) : null;
+                        <div class="accomd-modations-room_1">
+                            <div class="img">
+                                <a href="#"><img src="data:image/png;base64,@base64Image" alt=""></a>
                             </div>
-                        </div>
 
-                    </div>
-                    <!-- END / ITEM -->
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1">
-                        <div class="img">
-                            <a href="#"><img src="~/images/STANDARTIND.jpg" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="#">Standart Oda</a></h2>
-                            <p class="desc">Şık ve konforlu tasarımıyla huzurlu bir konaklama sunar. Tüm temel olanaklara sahip olup, Kapadokya ruhunu hissettirir.</p>
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout"></span> 
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">DETAYLARI GÖRÜNTÜLE</a>
+                            <div class="text">
+                                <p>@room.Name</p>
+                                <p class="desc">@room.Description</p>
+                                <div class="wrap-price">
+                                    <p class="price">
+                                        <span class="amout">@room.Price</span>
+                                    </p>
+                                    <a href="/Home/Detail?Id=@room.Id" class="awe-btn awe-btn-default">DETAYLARI GÖRÜNTÜLE</a>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- END / ITEM -->
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1">
-                        <div class="img">
-                            <a href="#"><img src="~/images/KINGSUİTIND.jpg" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="#">King Suit Oda</a></h2>
-                            <p class="desc">Geniş yaşam alanı, lüks mobilyalar ve jakuzili banyosuyla konforun zirvesini yaşayın. Özel terasıyla Kapadokya manzarasının keyfini çıkarın.</p>
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout"></span> 
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">DETAYLARI GÖRÜNTÜLE</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END / ITEM -->
-                    <!-- ITEM -->
-                    
-                    <!-- END / ITEM -->
 
+                        </div>
+                    }
                 </div>
 
             </div>
@@ -151,7 +117,6 @@
     </div>
 </section>
 <!-- ACCOMMODATIONS -->
-
 <!-- ABOUT -->
 <section class="section-home-about bg-white">
     <div class="container">
@@ -195,7 +160,7 @@
                             <li><img src="~/images/home/ourbest/icon-2.png" alt="icon">Televizyon</li>
                             <li><img src="~/images/home/ourbest/icon-4.png" alt="icon">Jakuzi Keyfi</li>
                             <li><img src="~/images/home/ourbest/icon-5.png" alt="icon">Kaliteli Hizmet </li>
-                           
+
                         </ul>
                     </div>
                 </div>

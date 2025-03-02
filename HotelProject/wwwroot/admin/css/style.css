@@ -3794,7 +3794,7 @@ body.layout-3 .main-footer {
             }
 
 .main-content {
-    padding-right: 30px;
+    padding-left: 30px;
     padding-top: 80px;
     position: relative;
     width: 1354px;
@@ -3998,9 +3998,22 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     font-size: 12px;
 }
 
-.image-wrapper:hover .delete-btn {
-    display: block;
+.image-wrapper {
+    position: relative;
+    flex: 1 1 18%;
+    max-width: 18%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 10px;
 }
+
+    .image-wrapper img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 5px;
+    }
+
 
 
 

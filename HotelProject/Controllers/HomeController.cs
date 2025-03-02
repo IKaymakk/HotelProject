@@ -12,7 +12,8 @@ namespace HotelProject.Controllers
         {
             try
             {
-                return View();
+                var result = homeService.GetMainPageRooms();
+                return View(result);
             }
             catch (Exception ex)
             {
@@ -23,7 +24,9 @@ namespace HotelProject.Controllers
 
         public IActionResult About()
         {
-            return View();
+            var about = homeService.GetAbout();
+
+            return View(about);
         }
         public IActionResult Room()
         {

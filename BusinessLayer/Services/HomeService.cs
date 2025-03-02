@@ -1,12 +1,8 @@
-﻿using DataAccessLayer;
-using DataAccessLayer.DataAccessLayer;
+﻿using DataAccessLayer.DataAccessLayer;
 using EntityLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLayer.Services
 {
@@ -21,44 +17,51 @@ namespace BusinessLayer.Services
             _logger = logger;
 
         }
+        //public List<RoomCategory> GetRoomCategories()
+        //{
+        //    try
+        //    {
 
+        //        return categories;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError("Error getting categories: ", ex);
+        //        return null;
+        //    }
+        //}
         public List<Room> GetMainPageRooms()
         {
             try
             {
-                var popularRooms = _context.Rooms
-                    .Where(x => x.isMainPage == true)
-                    .ToList(); 
+                List<Room> popularRooms = new List<Room>();
+                var categories = _context.RoomCategories
+                    .Include(c => c.Rooms.Where(r => !r.isDeleted))
+                        .ThenInclude(r => r.RoomImages.Where(img => !img.isDeleted))
+                    .Include(c => c.Rooms.Where(r => !r.isDeleted))
+                        .ThenInclude(r => r.RoomFeatures.Where(f => !f.isDeleted))
+                    .ToList();
 
-                foreach (var room in popularRooms)
+                foreach (var category in categories)
                 {
-                    var roomImages = _context.RoomImages
-                        .Where(x => x.RoomId == room.Id && !x.isDeleted) 
-                        .ToList();
-
-                    if (roomImages.Any())
-                    {
-                        var firstImage = roomImages.FirstOrDefault();
-                        if (firstImage?.FileData != null)
-                        {
-                            room.ImageBase64 = Convert.ToBase64String(firstImage.FileData);
-                        }
-                    }
+                    var roomsInCategory = category.Rooms.Where(x => x.isMainPage == true && x.isDeleted == false).ToList();
+                    popularRooms.AddRange(roomsInCategory);  
                 }
 
                 return popularRooms;
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error getting room images: ", ex);
-                return null;
+                return new List<Room>();  
             }
-        }  
+
+         
+        }
         public ContactInformations GetContactInformations()
         {
             try
             {
-                var contactInformations = _context.ContactInformations.First(); 
+                var contactInformations = _context.ContactInformations.First();
                 return contactInformations;
             }
             catch (Exception ex)
@@ -66,8 +69,22 @@ namespace BusinessLayer.Services
                 _logger.LogError("Error getting contact infos: ", ex);
                 return null;
             }
-        }   
-      
+        }
+
+        public AboutUs GetAbout()
+        {
+            try
+            {
+                var about = _context.AboutUs.First();
+                return about;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting contact infos: ", ex);
+                return null;
+            }
+        }
+
 
 
     }

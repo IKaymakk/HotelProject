@@ -1,4 +1,4 @@
-﻿
+﻿var roomId;
 
 $(document).ajaxStart(function () {
     $("#loadingDiv").show();
@@ -260,6 +260,7 @@ function GetRoomDetail(ForWhat) {
         url: '/Admin/GetRoomDetail',
         data: { roomId: roomId },
         success: function (response) {
+            roomId = response
             if (ForWhat == "General") {
                 $("#roomPrice").val(response.data.price)
                 const value = response.data.isMainPage;
@@ -274,21 +275,14 @@ function GetRoomDetail(ForWhat) {
                 var imageSubContainer = $("#imageSubContainer");
                 imageSubContainer.html("");
                 response.data.roomImages.forEach(function (image) {
-                    var imgElement = $('<div class="image-wrapper"></div>')
-                        .append('<img src="data:image/jpeg;base64,' + image.fileData + '" class="img-fluid" id="roomImage">')
-                        .append('<button class="btn btn-danger delete-btn" onclick="deleteImage(' + image.imageId + ')">Sil</button>');
-
-                    $('#imageSubContainer').css({
-                        'display': 'flex',
-                        'flex-wrap': 'wrap',
-                        'gap': '10px'
-                    });
-
-                    imgElement.css({
-                        'flex': '1 1 18%',
-                        'max-width': '18%',
-                        'box-sizing': 'border-box'
-                    });
+                    var imgElement = $('<div class="image-wrapper" style="flex: 1 1 30%; max-width: 30%; box-sizing: border-box; position: relative; margin-bottom: 20px;"></div>')
+                        .append('<div class="image-controls" style="background-color: #f1f1f1; padding: 10px; display: flex; justify-content: space-between; margin-bottom: 10px;">' +
+                            '<button class="btn btn-danger" onclick="deleteImage(' + image.imageId + ')">Sil</button>' +
+                            '<button class="btn btn-primary" onclick="setCoverImage(' + image.imageId + ', ' + response.data.id + ')">Kapak Fotoğrafı Yap</button>' +
+                            '</div>')
+                        .append('<div class="image-content" style="background-color: #e9ecef; padding: 10px; border-radius: 5px;">' +
+                            '<img src="data:image/jpeg;base64,' + image.fileData + '" class="img-fluid" id="roomImage">' +
+                            '</div>');
 
                     $('#imageSubContainer').append(imgElement);
                 });
@@ -380,6 +374,51 @@ function updateExtraSettings() {
         },
         error: function (xhr, status, error) {
             alert('Beklenmedik bir hata oluştu: ' + error);
+        }
+    });
+}
+
+
+
+
+
+
+
+function setCoverImage(ImageId,RoomId) {
+
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/SetCoverImage',
+        data: {
+            ImageId: ImageId,
+            RoomId: RoomId
+        },
+        success: function (response) {
+            if (response.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: 'Seçili resim başarıyla ayarlandı!',
+                    confirmButtonText: 'Tamam'
+                });
+                GetRoomDetail("General");
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Resim ayarlanamadı: ' + (response.failed || []).join(", "),
+                    confirmButtonText: 'Tamam'
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Hata detayları:", xhr.responseText);
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata!',
+                text: 'Beklenmedik bir hata oluştu: ' + error,
+                confirmButtonText: 'Tamam'
+            });
         }
     });
 }
