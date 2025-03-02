@@ -12,18 +12,27 @@
         <div class="container-fluid p-0">
             <div class="row">
                 <div class="col-12">
-                    <div class="d-flex justify-content-between align-items-center p-3">
-                        <div>
-                            <label class="form-label">Oda Seç:</label>
-                            <select style="border-radius: 0;" name="site_title" class="form-control" id="roomNumber" onchange="GetRoomDetail('General')">
-                                @foreach (var room in Model)
-                                {
-                                    <option value="@room.Id">@room.Name</option>
-                                }
-                            </select>
+                    <div class="d-flex justify-content-between align-items-center p-3 mt-3">
+                        <div class="d-flex flex-grow-1 align-items-center gap-3">
+                            <div>
+                                <label class="form-label">Oda Seç:</label>
+                                <select style="border-radius: 0;" name="site_title" class="form-control" id="roomNumber" onchange="GetRoomDetail('General')">
+                                    @foreach (var room in Model)
+                                    {
+                                        <option value="@room.Id">@room.Name</option>
+                                    }
+                                </select>
+                            </div>
                         </div>
-                        <button onclick="openRoomModal()" style="border-radius:0;" class="btn btn-primary">Oda Ekle</button>
+                        <div class="text-end">
+                            <button onclick="openRoomModal()" style="border-radius:0; margin-right:20px;" class="btn btn-primary mt-2">Oda Ekle</button>
+                        </div>
+
+
+
                     </div>
+
+
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#odaözellik" role="tab">Oda Özellikleri</a>
@@ -37,37 +46,38 @@
                     </ul>
 
                     <div class="tab-content p-3" id="myTabContent">
-                        <!-- Oda Özellikleri Tabı -->
                         <div class="tab-pane fade show active" id="odaözellik" role="tabpanel">
                             <div>
                                 <h6>Oda Özellikleri:</h6>
-                                <div class="d-flex gap-2 mb-3">
-                                    <button class="btn btn-primary btn-sm" onclick="openEditModal()">Düzenle</button>
-                                    <button class="btn btn-primary btn-sm" onclick="openAddFeatureModal()">Ekle</button>
+                                <div class="d-flex justify-content-end" style="max-width: 250px; margin-left: auto; margin-right: 20px; gap: 10px; margin-bottom:20px;">
+                                    <button class="btn btn-primary btn-sm">Düzenle</button>
+                                    <button class="btn btn-primary btn-sm">Ekle</button>
                                 </div>
+
                                 <ul class="list-group" id="featureWrapper">
                                     @foreach (var feature in firstRoom?.RoomFeatures)
                                     {
-
                                         <li class="list-group-item">@feature.Features</li>
-
                                     }
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Oda Resimleri Tabı -->
+
+
+
+
                         <div class="tab-pane fade" id="odaresim" role="tabpanel">
                             <div>
-                                <div class="d-flex justify-content-between mb-3">
-                                    <button class="btn btn-primary" onclick="openPictureModal()">Resim Ekle</button>
+                                <div class="d-flex justify-content-end mb-3">
+                                    <button style="margin-right:20px;" class="btn btn-primary" onclick="openPictureModal()">Resim Ekle</button>
                                 </div>
                                 <div class="row" id="imageContainer" style="background-color: #ffffff; padding: 20px;">
                                     <div class="col-md-12 d-flex flex-wrap gap-3" id="imageSubContainer">
                                         @foreach (var image in firstRoom?.RoomImages)
                                         {
                                             <div class="image-wrapper" style="flex: 1 1 30%; max-width: 30%; margin-bottom: 20px;">
-                                                <div class="image-controls" style="background-color: #f1f1f1; padding: 10px;display: flex;justify-content: space-between;">
+                                                <div class="image-controls" style="background-color: #f1f1f1; padding: 10px; display: flex; justify-content: space-between;">
                                                     <button class="btn btn-primary" onclick="setCoverImage(@image.ImageId, @firstRoom.Id)">Kapak Fotoğrafı Yap</button>
                                                     <button class="btn btn-danger" onclick="deleteImage(@image.ImageId)">Sil</button>
                                                 </div>
@@ -81,7 +91,8 @@
                             </div>
                         </div>
 
-                        <!-- Ekstra Ayarlar Tabı -->
+
+
                         <div class="tab-pane fade" id="odapop" role="tabpanel">
                             <div>
                                 <div class="row mb-3">
