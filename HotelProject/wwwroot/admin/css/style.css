@@ -81,6 +81,7 @@ a {
 .bg-primary {
     background-color: #6777ef !important;
 }
+
 .small-btn {
     padding: 11px 13px !important; /* Ne çok küçük ne çok büyük */
     font-size: 13px !important; /* Yazıyı biraz küçülttük ama okunaklı */
@@ -818,28 +819,28 @@ select.form-control:not([size]):not([multiple]) {
         position: static;
     }
 
-/*    .card .card-body {
+    /*    .card .card-body {
         padding-top: 20px;
         padding-bottom: 20px;
         height: 620px;
     }*/
 
-        .card .card-body .section-title {
-            margin: 30px 0 10px 0;
-            font-size: 16px;
+    .card .card-body .section-title {
+        margin: 30px 0 10px 0;
+        font-size: 16px;
+    }
+
+        .card .card-body .section-title:before {
+            margin-top: 8px;
         }
 
-            .card .card-body .section-title:before {
-                margin-top: 8px;
-            }
-
-            .card .card-body .section-title + .section-lead {
-                margin-top: -5px;
-            }
-
-        .card .card-body p {
-            font-weight: 500;
+        .card .card-body .section-title + .section-lead {
+            margin-top: -5px;
         }
+
+    .card .card-body p {
+        font-weight: 500;
+    }
 
     .card .card-header {
         border-bottom-color: #f9f9f9;
@@ -880,6 +881,7 @@ select.form-control:not([size]):not([multiple]) {
             line-height: 28px;
             padding-right: 10px;
             margin-bottom: 0;
+            margin-left: -433px;
         }
 
             .card .card-header h4 + .card-header-action,
@@ -1343,6 +1345,7 @@ table tr:hover .table-links {
 .tooltip-inner {
     padding: 7px 13px;
 }
+
 .tab-content.no-padding > .tab-pane {
     padding: 0;
 }
@@ -1383,7 +1386,7 @@ table tr:hover .table-links {
 
 .modal-content {
     width: 800px;
-/*    height: 600px;*/
+    /*    height: 600px;*/
     border: none;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
 }
@@ -1627,7 +1630,6 @@ h6 .badge {
     font-size: 12px;
     line-height: 24px;
     padding: .3rem .8rem;
-    
 }
 
     .btn.btn-icon-split {
@@ -2772,12 +2774,7 @@ body {
     font-weight: 400;
     font-family: 'Nunito', 'Segoe UI', arial;
     color: #6c757d;
-    
-
-
     overflow-x: hidden;
-
-
 }
 
 a.bb {
@@ -4047,4 +4044,61 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     100% {
         transform: rotate(360deg);
     }
+}
+#home .form-control,
+#profile .form-control,
+#contact .form-control,
+#social .form-control {
+    width: 50% !important; 
+    margin: 10px auto !important; 
+    display: block !important; 
+}
+
+#home textarea.form-control,
+#profile textarea.form-control,
+#contact textarea.form-control,
+#social textarea.form-control {
+    width: 50% !important; 
+    margin: 10px auto !important; 
+    display: block !important; 
+}
+
+#home .form-group,
+#profile .form-group,
+#contact .form-group,
+#social .form-group {
+    text-align: left !important; 
+    margin-bottom: 10px !important;
+}
+
+    #home .form-group label,
+    #profile .form-group label,
+    #contact .form-group label,
+    #social .form-group label {
+        display: inline-block !important; 
+        margin-left: 310px;
+        margin-bottom: 5px !important; 
+        font-weight: bold !important; 
+    }
+
+#home .form-control,
+#profile .form-control,
+#contact .form-control,
+#social .form-control {
+    width: 50% !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+#home .form-group button,
+#profile .form-group button,
+#contact .form-group button,
+#social .form-group button {
+    display: block !important;
+    width: 150px !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    border-radius: 0px !important;
 }

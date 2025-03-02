@@ -25,6 +25,7 @@
                             </div>
                         </div>
                         <div class="text-end">
+                            <button style="border-radius:0; margin-right:20px;" class="btn btn-primary mt-2">Oda Sil</button>
                             <button onclick="openRoomModal()" style="border-radius:0; margin-right:20px;" class="btn btn-primary mt-2">Oda Ekle</button>
                         </div>
 
@@ -50,8 +51,8 @@
                             <div>
                                 <h6>Oda Özellikleri:</h6>
                                 <div class="d-flex justify-content-end" style="max-width: 250px; margin-left: auto; margin-right: 20px; gap: 10px; margin-bottom:20px;">
-                                    <button class="btn btn-primary btn-sm">Düzenle</button>
-                                    <button class="btn btn-primary btn-sm">Ekle</button>
+                                    <button class="btn btn-primary btn-sm" onclick="openEditModal()">Düzenle</button>
+                                    <button class="btn btn-primary btn-sm" onclick="openAddFeatureModal()">Ekle</button>
                                 </div>
 
                                 <ul class="list-group" id="featureWrapper">
